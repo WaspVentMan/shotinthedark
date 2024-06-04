@@ -3,6 +3,10 @@
     src: url("font/Perfect DOS VGA 437.ttf");
 }
 
+body:hover{
+    cursor: none;
+}
+
 * {
     user-select: none;
     font-family: DOS;
@@ -16,6 +20,43 @@
     width: 40px;
     height: 15px;
     position: absolute;
+}
+
+.crosshair {
+    width: 69px;
+    height: 69px;
+    position: absolute;
+
+    background-image: url('img/crosspico.png');
+
+    pointer-events: none;
+    mix-blend-mode: difference;
+
+    z-index: 998;
+}
+
+.hitmarker {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+
+    background-image: url('img/hitmarker.png');
+
+    pointer-events: none;
+    mix-blend-mode: difference;
+    display: none;
+
+    z-index: 999;
+}
+
+.weapon {
+    background-color: transparent;
+    outline: none;
+}
+
+@keyframes crossheirSpin {
+    from {rotate: 0deg;}
+    to {rotate: 360deg;}
 }
 
 @keyframes target-test {

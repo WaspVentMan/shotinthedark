@@ -15,7 +15,8 @@
     </div>
     <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
         <div class="bullets"></div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <p style="bottom: 0px; left: 4px; position: absolute;" class="gunName">TEST</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; mix-blend-mode: difference;">
             <div>
                 <p class="score" style="text-align: left; color: white; margin-left: 16px; margin-top: 16px;">0</p>
                 <p class="combo" style="text-align: left; color: white; margin-left: 16px;">x0</p>
@@ -44,9 +45,9 @@
             <div class="accleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 512px;"></div>
         </div>
         <br>
-        <div onclick="init(); gameLoop = setInterval(gameloop, 10)">Restart?</div>
+        <div onclick="document.querySelector('.startScreen').style.display = 'block'; document.querySelector('.leaderboard').style.display = 'none'">Restart?</div>
     </div>
-    <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;" onclick="if (NGIO.STATUS_READY){musicPlayer.play(); this.style.display = 'none'}">
+    <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;">
         <br><br><br><br><br>
         <h1>Shots In The Dark</h1>
         <br>
@@ -58,8 +59,29 @@
         <p>Song:</p>
         <p>Frums - Credits</p>
         <br>
-        <div class="NewgroundsIO">NG Connecting...</div>
+        <div class="NewgroundsIO" onclick="if (NGIO.STATUS_READY && this.innerHTML == 'Click To Start.'){init()}">NG Connecting...</div>
+        <br>
+        <select class="weapon">
+            <option value="basic">Basic Pistol</option>
+            <option value="pico">Pico's MAC-10</option>
+            <option value="fortnite">Hand Cannon</option>
+        </select>
+        <br>
+        <br>
+        <h1>Stats</h1>
+        <h3 class="gunInfoName">Pico's MAC-10</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px;">
+            <p style="text-align: right;">Mag Capacity</p>
+            <p style="text-align: left;" class="gunInfoMag">32</p>
+            <p style="text-align: right;">Fire Rate</p>
+            <p style="text-align: left;" class="gunInfoRate">25/s</p>
+            <p style="text-align: right;">Score Mult</p>
+            <p style="text-align: left;" class="gunInfoScore">0.25x</p>
+        </div>
     </div>
+
+    <div class="crosshair"></div>
+    <div class="hitmarker"></div>
 
     <script src="nginit.js"></script>
     <script src="script.js"></script>

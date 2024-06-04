@@ -39,7 +39,7 @@ let ngLoop = setInterval(function(){
 
             // user needs to log in
             case NGIO.STATUS_LOGIN_REQUIRED:
-                document.querySelector(".NewgroundsIO").innerHTML = "Please log into Newgrounds"
+                document.querySelector(".NewgroundsIO").innerHTML = "<p onclick=\"NGIO.openLoginPage()\">Please log into Newgrounds</p>"
 
                 // Show a "Log In" button that calls NGIO.openLoginPage();
                 // Show a "No Thanks" button that calls NGIO.skipLogin();
