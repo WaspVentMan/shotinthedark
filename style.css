@@ -27,8 +27,6 @@ body:hover{
     height: 69px;
     position: absolute;
 
-    background-image: url('img/crosspico.png');
-
     pointer-events: none;
     mix-blend-mode: difference;
 
@@ -47,6 +45,23 @@ body:hover{
     display: none;
 
     z-index: 999;
+
+    opacity: 100%;
+
+    transition: opacity 1s;
+}
+
+.targetghost {
+    width: 128px;
+    height: 128px; 
+    position: absolute;
+
+    background-image: url('img/targetghost.png');
+
+    pointer-events: none;
+    opacity: 10%;
+
+    z-index: 997;
 }
 
 .weapon {

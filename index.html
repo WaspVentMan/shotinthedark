@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SITD</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
-<body style="margin: 0; background-color: white;">
-    <div style="width: 512px; height: 512px; position: absolute; text-align: left;">
-        <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; animation: target-test 4s linear infinite; border-radius: 100%;">
+<body style="margin: 0; background-color: black;" oncontextmenu="return false" onload="document.querySelector('.loadScreen').remove()">
+    <div class="light" style="width: 512px; height: 512px; position: absolute; text-align: left; background-color: white; background-size: cover;">
+        <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%;">
     </div>
     <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
         <div class="bullets"></div>
-        <p style="bottom: 0px; left: 4px; position: absolute;" class="gunName">TEST</p>
+        <img class="gundisp" src="img/buckshot.png" style="position: absolute; bottom: 20px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference;">
+        <p class="gunName" style="position: absolute; bottom: 138px; right: -118px; width: 256px; rotate: 90deg; text-align: right;">TEST</p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; mix-blend-mode: difference;">
             <div>
                 <p class="score" style="text-align: left; color: white; margin-left: 16px; margin-top: 16px;">0</p>
@@ -28,9 +29,10 @@
                 <p class="ver" style="text-align: right; color: white; margin-right: 16px;"></p>
             </div>
         </div>
+        <p class="subtitle" style="position: absolute; text-align: center; bottom: 0%; left: 0%; width: 100%;"></p>
     </div>
-    <div class="leaderboard" style="width: 512px; height: 512px; z-index: 102; position: absolute; display: none; background-color: black;">
-        <h1>Frums - Credits</h1>
+    <div class="leaderboard" style="width: 512px; height: 512px; z-index: 102; position: absolute; display: none; background-color: black; text-align: center;">
+        <h1>Femtanyl - KATAMARI</h1>
         <br>
         <div style="width: 512px; height: 128px;">
             <p>Score</p>
@@ -48,42 +50,89 @@
         <div onclick="document.querySelector('.startScreen').style.display = 'block'; document.querySelector('.leaderboard').style.display = 'none'">Restart?</div>
     </div>
     <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;">
-        <br><br><br><br><br>
+        <br>
         <h1>Shots In The Dark</h1>
         <br>
         <p>Click to shoot.</p>
-        <p>R to reload.</p>
+        <p>R or Right Click to reload.</p>
+        <p>L to end the song early.</p>
         <br>
         <p>Scores are saved once the song ends.</p>
         <br>
         <p>Song:</p>
-        <p>Frums - Credits</p>
-        <br>
-        <div class="NewgroundsIO" onclick="if (NGIO.STATUS_READY && this.innerHTML == 'Click To Start.'){init()}">NG Connecting...</div>
-        <br>
-        <select class="weapon">
-            <option value="basic">Basic Pistol</option>
-            <option value="pico">Pico's MAC-10</option>
-            <option value="fortnite">Hand Cannon</option>
+        <select style="background-color: white; color: black; font-family: DOS;" class="songSelect">
+            <!--<option value="credits">Frums - Credits</option>-->
+            <option value="KATAMARI">Femtanyl - KATAMARI</option>
         </select>
         <br>
         <br>
-        <h1>Stats</h1>
-        <h3 class="gunInfoName">Pico's MAC-10</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px;">
+        <p>Weapon:</p>
+        <p>gun select is disabled rn, sorry :/</p>
+        <select style="background-color: white; color: black; font-family: DOS; display: none;" class="weapon">
+            <option value="basic">Automatic Pistol</option>
+            <option value="classic">Manual Pistol</option>
+            <option value="pico">Pico's MAC-10</option>
+            <option value="picoPlus">Debug MAC-10</option>
+            <option value="fortnite">Hand Cannon</option>
+            <option value="buckshot">Shotgun</option>
+        </select>
+        <br>
+        <br>
+        <div style="display: grid; grid-template-columns: 4fr 1fr 4fr; column-gap: 8px;">
             <p style="text-align: right;">Mag Capacity</p>
+            <p>|</p>
             <p style="text-align: left;" class="gunInfoMag">32</p>
+            <p style="text-align: right;">Fire Mode</p>
+            <p>|</p>
+            <p style="text-align: left;" class="gunInfoMode">25/s</p>
             <p style="text-align: right;">Fire Rate</p>
+            <p>|</p>
             <p style="text-align: left;" class="gunInfoRate">25/s</p>
+            <p style="text-align: right;">Reload Time</p>
+            <p>|</p>
+            <p style="text-align: left;" class="gunInfoReload">0s</p>
+            <p style="text-align: right;">Instability</p>
+            <p>|</p>
+            <p style="text-align: left;" class="gunInfoAcc">0-1</p>
+            <p style="text-align: right;">Inst/shot</p>
+            <p>|</p>
+            <p style="text-align: left;" class="gunInfoAccDec">0/shot</p>
             <p style="text-align: right;">Score Mult</p>
+            <p>|</p>
             <p style="text-align: left;" class="gunInfoScore">0.25x</p>
+        </div>
+        <br>
+        <div class="NewgroundsIO" onclick="if (NGIO.STATUS_READY && this.innerHTML == 'Click To Start.'){init()}">NG Connecting...</div>
+    </div>
+
+    <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-image: url('img/ebe.png'); background-size: cover;">
+        <div style="display: none;">
+            <audio src="audio/Credits EX.mp3"></audio>
+            <audio src="audio/Credits.mp3"></audio>
+            <audio src="audio/HC_reload.mp3"></audio>
+            <audio src="audio/HC_shoot.mp3"></audio>
+            <audio src="audio/reload.mp3"></audio>
+            <audio src="audio/reloadshort.mp3"></audio>
+            <audio src="audio/shot2.mp3"></audio>
+            <audio src="audio/shot3.mp3"></audio>
         </div>
     </div>
 
-    <div class="crosshair"></div>
-    <div class="hitmarker"></div>
+    <div class="crosshair">
+        <div style="position: absolute; top: 0%; left: 0%; width: 7px; height: 7px; background-image: url('img/crossTL.png');"></div>
+        <div style="position: absolute; top: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-image: url('img/crossTC.png');"></div>
+        <div style="position: absolute; top: 0%; right: 0%; width: 7px; height: 7px; background-image: url('img/crossTR.png');"></div>
+        <div style="position: absolute; top: calc(50% - 0.5px); left: 0%; width: 7px; height: 1px; background-image: url('img/crossCL.png');"></div>
+        <div style="position: absolute; top: calc(50% - 0.5px); left: calc(50% - 0.5px); width: 1px; height: 1px; background-color: white;"></div>
+        <div style="position: absolute; top: calc(50% - 0.5px); right: 0%; width: 7px; height: 1px; background-image: url('img/crossCR.png');"></div>
+        <div style="position: absolute; bottom: 0%; left: 0%; width: 7px; height: 7px; background-image: url('img/crossBL.png');"></div>
+        <div style="position: absolute; bottom: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-image: url('img/crossBC.png');"></div>
+        <div style="position: absolute; bottom: 0%; right: 0%; width: 7px; height: 7px; background-image: url('img/crossBR.png');"></div>
+    </div>
 
     <script src="nginit.js"></script>
+
+    <script src="songs.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

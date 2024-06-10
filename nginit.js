@@ -69,7 +69,7 @@ let ngLoop = setInterval(function(){
 
 function onMedalUnlocked(medal)
 {
-    //document.querySelector(".achievement").innerHTML = `<div style="text-align: right; margin-right: 8px;"><h1>${medal.name}</h1><h3>${medal.description}</h3><h2>+${medal.value} Points</h2></div><img style="width: 140px;" src="ach/${medal.id}.png">`
+    //document.querySelector(".achievement").innerHTML += `<div style="text-align: right; margin-right: 8px;"><p>${medal.name}</p><p>${medal.description}</p><p>+${medal.value} Points</p></div><img style="width: 50px;" src="https:${medal.icon}.png">`
     /**
      * Show a medal popup.  You can get medal information like so:
      *   medal.id
