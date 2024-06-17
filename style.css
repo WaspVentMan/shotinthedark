@@ -13,7 +13,13 @@ body:hover{
     color: white;
     text-align: center;
 
+    image-rendering: pixelated;
+
     margin: 0%;
+}
+
+p {
+    height: 16px;
 }
 
 .bullet {

@@ -26,9 +26,9 @@ let ngLoop = setInterval(function(){
             case NGIO.STATUS_LOCAL_VERSION_CHECKED:
 
                 if (NGIO.isDeprecated) {
-                    document.querySelector(".ver").innerHTML = "v" + options.version + " (outdated)"
+                //    document.querySelector(".ver").innerHTML = "v" + options.version + " (outdated)"
                 } else {
-                    document.querySelector(".ver").innerHTML = "v" + options.version
+                //    document.querySelector(".ver").innerHTML = "v" + options.version
                 }
 
                 if (!NGIO.legalHost) {
