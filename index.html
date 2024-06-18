@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
 <body style="margin: 0; background-color: black;" oncontextmenu="return false" onload="load = true">
-    <div style="width: 512px; height: 512px; position: absolute; text-align: left; background-color: white; background-image: url('img/rgb.png');">
-        <img class="light" draggable="false" src="img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: multiply;">
+    <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-color: white; background-image: url('img/rgb.png');">
+        <img class="light" draggable="false" src="img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
         <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
     </div>
     <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
@@ -19,7 +19,7 @@
         <img class="gundisp" src="img/buckshot.png" style="position: absolute; bottom: 20px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference;">
         <p class="gunName" style="position: absolute; bottom: 138px; right: -118px; width: 256px; rotate: 90deg; text-align: right;"></p>
         <div class="newTime" style="width: 512px; height: 4px; background-color: #fff; margin-bottom: 12px; mix-blend-mode: difference;"></div>
-        <div style="display: grid; grid-template-columns: 1fr 8fr; mix-blend-mode: difference; position: absolute; width: 512px;">
+        <div style="display: grid; grid-template-columns: 2fr 8fr; mix-blend-mode: difference; position: absolute; width: 512px;">
             <div>
                 <p class="score" style="text-align: left; color: white; margin-left: 16px;"></p>
                 <p class="combo" style="text-align: left; color: white; margin-left: 16px;"></p>
@@ -114,10 +114,7 @@
                 </div>
             </div>
         </div>
-        <p style="position: absolute; bottom: 32px; left: 0px;" onclick="allSongs(); this.remove()">ADD WIP SONGS TO MENU</p>
-        <p style="position: absolute; bottom: 16px; left: 0px;">Music: <b class="musVol">50</b>% <b onclick="volchange(0, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/KATAMARI_test.mp3`); gunshot.volume = volume[0]/100; gunshot.play();">test</b> <b onclick="volchange(0, 5)">>>></b></p>
-        <p style="position: absolute; bottom: 0px; left: 0px;">Sound: <b class="sndVol">50</b>% <b onclick="volchange(1, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/shot${Math.round(Math.random())+2}.mp3`); gunshot.volume = volume[1]/100; gunshot.play();">test</b> <b onclick="volchange(1, 5)">>>></b></p>
-
+        <p style="position: absolute; bottom: 0px; left: 0px;" onclick="document.querySelector('.settingsScreen').style.display = 'block'">SETTINGS</p>
         <div style="position: absolute; width: 64px; bottom: 0%; right: calc(50% - 32px); height: max-content;">
             <p>LINKS</p>
             <div style="width: min-content; margin: auto; display: flex;">
@@ -132,6 +129,39 @@
             <p class="gundispname" style="position: absolute; bottom: 118px; right: -118px; width: 256px; rotate: 90deg; text-align: right; height: 20px;">Shotgun</p>
         </div>
     </div>
+    <div class="settingsScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; display: none;">
+        <h1>THE SETTINGS MENU I MADE IN LIKE 5 MINUTES</h1>
+        <p onclick="document.querySelector('.settingsScreen').style.display = 'none'">BACK</p>
+        <br>
+        <p onclick="allSongs(); this.remove()">ADD WIP SONGS TO MENU</p>
+        <p>Music: <b class="musVol">50</b>% <b onclick="volchange(0, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/KATAMARI_test.mp3`); gunshot.volume = volume[0]/100; gunshot.play();">test</b> <b onclick="volchange(0, 5)">>>></b></p>
+        <p>Sound: <b class="sndVol">50</b>% <b onclick="volchange(1, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/shot${Math.round(Math.random())+2}.mp3`); gunshot.volume = volume[1]/100; gunshot.play();">test</b> <b onclick="volchange(1, 5)">>>></b></p>
+        <br>
+        <p>Preffered pistol</p>
+        <p onclick="
+        if (guns.classic.auto){
+            guns.classic.auto = false
+            guns.classic.rate = 0
+            this.textContent = 'Manual'
+        } else {
+            guns.classic.auto = true
+            guns.classic.rate = 160
+            this.textContent = 'Automatic'
+        }
+        ">Manual</p>
+        <br>
+        <p>Baby Mode (censors the FUCK word and others)</p>
+        <p onclick="
+        if (songs.tutorial.name == 'Tutorial'){
+            songs.tutorial = songsXTRA.baby_tutorial
+            this.textContent = 'ON'
+        } else {
+            songs.tutorial = songsXTRA.tutorial
+            this.textContent = 'OFF'
+        }
+        songchange(0)
+        ">OFF</p>
+    </div>
 
     <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.'){songchange(0); this.style.display = 'none'}">
         <br>
@@ -139,19 +169,18 @@
         <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>
         <div style="display: none;">
             <img src="img/ebe.png">
-            <audio preload="auto" src="audio/amalgam.mp3"></audio>
-            <audio preload="auto" src="audio/KATAMARI.mp3"></audio>
+            <audio preload="auto" src="audio/music/amalgam.mp3"></audio>
+            <audio preload="auto" src="audio/music/KATAMARI.mp3"></audio>
             <audio preload="auto" src="audio/KATAMARI_prev.mp3"></audio>
-            <audio preload="auto" src="audio/tutorial.mp3"></audio>
-            <audio preload="auto" src="audio/tutorial_prev.mp3"></audio>
-            <audio preload="auto" src="audio/brainrot.mp3"></audio>
+            <audio preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
+            <audio preload="auto" src="audio/music/tutorial.mp3"></audio>
+            <audio preload="auto" src="audio/Boot Sequence.mp3"></audio>
             <audio preload="auto" src="audio/HC_reload.mp3"></audio>
             <audio preload="auto" src="audio/HC_shoot.mp3"></audio>
             <audio preload="auto" src="audio/reload.mp3"></audio>
             <audio preload="auto" src="audio/reloadshort.mp3"></audio>
             <audio preload="auto" src="audio/shot2.mp3"></audio>
             <audio preload="auto" src="audio/shot3.mp3"></audio>
-            <img src="img/brainrot.gif">
             <img src="img/buckshot.png">
             <img src="img/bullet.png">
             <img src="img/case.png">
@@ -198,6 +227,7 @@
 
     <script src="nginit.js"></script>
 
+    <script src="guns.js"></script>
     <script src="songs.js"></script>
     <script src="script.js"></script>
 </body>

@@ -4,7 +4,8 @@ const songsDONE = {
         "prev": "audio/music/tutorial.mp3",
         "artist": "WaspVentMan",
         "name": "Tutorial",
-        "art": "img/fear.png",
+        "cover": "img/ante iudicium doceo.png",
+        "background": "img/ante iudicium doceo.png",
         "link": [
             {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
         ],
@@ -71,15 +72,16 @@ const songsDONE = {
         "prev": "audio/music/amalgam.mp3",
         "artist": "Toby Fox",
         "name": "Amalgam",
-        "art": "img/cover_UT.png",
+        "cover": "img/cover_UT.png",
+        "background": "img/truelab.png",
         "link": [
             {"url": "https://undertale.com/", "type": "UT"},
             {"url": "https://tobyfox.bandcamp.com/album/undertale-soundtrack", "type": "BC"}
         ],
         "leaderboards": [
-            13874, //score
-            13873, //combo
-            13872  //acc
+            13874,
+            13873,
+            13872
         ],
         "chart": [
             {"pos":[256,-64],"time":0},
@@ -323,13 +325,13 @@ const songsDONE = {
         "guns": [
             {"time": 0, "gun": "none"},
             {"time": 4.9, "gun": "classic"},
-            {"time": 4.9+5.3, "gun": "pico"},
-            {"time": 4.9+(5.3*2), "gun": "fortnite"},
-            {"time": 4.9+(5.3*3), "gun": "buckshot"},
-            {"time": 4.9+(5.3*4), "gun": "fortnite"},
-            {"time": 4.9+(5.3*5), "gun": "pico"},
-            {"time": 4.9+(5.3*6), "gun": "classic"},
-            {"time": 4.9+(5.3*7), "gun": "none"},
+            {"time": 10.2, "gun": "pico"},
+            {"time": 15.5, "gun": "fortnite"},
+            {"time": 20.8, "gun": "buckshot"},
+            {"time": 26.1, "gun": "fortnite"},
+            {"time": 31.4, "gun": "pico"},
+            {"time": 36.7, "gun": "classic"},
+            {"time": 42, "gun": "none"},
             {"time": 53.3, "gun": "rbuster"},
             {"time": 63.86, "gun": "classic"},
             {"time": 66.56, "gun": "pico"},
@@ -342,7 +344,7 @@ const songsDONE = {
             { "time": 0, "subtitle": "" },
             { "time": 4.9, "subtitle": "* YOU FEEL YOUR GUN... SQUIRM?" },
             { "time": 7.8, "subtitle": "* IT'S ALIVE!" },
-            { "time": 4.9+5.3, "subtitle": "" },
+            { "time": 10.2, "subtitle": "" },
             { "time": 48.3, "subtitle": "NEXT PATTERN IN: 5" },
             { "time": 49.3, "subtitle": "NEXT PATTERN IN: 4" },
             { "time": 50.3, "subtitle": "NEXT PATTERN IN: 3" },
@@ -360,7 +362,8 @@ const songsWIP = {
         "prev": "audio/music/KATAMARI_prev.mp3",
         "artist": "Femtanyl",
         "name": "KATAMARI",
-        "art": "img/Femtanyl - KATAMARI.png",
+        "cover": "img/Femtanyl - KATAMARI.png",
+        "background": "img/Femtanyl - KATAMARI.png",
         "link": [
             {"url": "https://www.newgrounds.com/audio/listen/1264675", "type": "NG"},
             {"url": "https://femtanyl.bandcamp.com/track/katamari", "type": "BC"}
@@ -601,7 +604,8 @@ const songsWIP = {
         "prev": "audio/music/Mystery Circles Ultra.mp3",
         "artist": "かめりあ(Camellia)",
         "name": "Mystery Circles Ultra / U.U.F.O.",
-        "art": "img/cover_UUFO.png",
+        "cover": "img/cover_UUFO.png",
+        "background": "img/cover_UUFO.png",
         "link": [
             {"url": "https://cametek.bandcamp.com/track/mystery-circles-ultra-u-u-f-o", "type": "BC"},
         ],
@@ -611,11 +615,150 @@ const songsWIP = {
             {"pos":[0,0],"time":1e+100}
         ],
         "guns": [
-            {"time": 0, "gun": "classic"},
+            {"time": 0, "gun": "none"},
             {"time": 1e100, "gun": "none"}
         ],
         "subtitle": [
             { "time": 0, "subtitle": "" },
+            { "time": 1e100, "subtitle": "" }
+        ]
+    }
+}
+
+const songsXTRA = {
+    "tutorial": {
+        "music": "audio/music/tutorial.mp3",
+        "prev": "audio/music/tutorial.mp3",
+        "artist": "WaspVentMan",
+        "name": "Tutorial",
+        "cover": "img/ante iudicium doceo.png",
+        "background": "img/ante iudicium doceo.png",
+        "link": [
+            {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
+        ],
+        "leaderboards": [
+            13853, //score
+            13852, //combo
+            13851  //acc
+        ],
+        "chart": [
+            { "time": 0, "pos": [128, 128] },
+            { "time": 2, "pos": [384, 128] },
+            { "time": 4, "pos": [384, 384] },
+            { "time": 6, "pos": [128, 384] },
+            { "time": 8, "pos": [128, 128] },
+            { "time": 10, "pos": [384, 128] },
+            { "time": 12, "pos": [384, 384] },
+            { "time": 14, "pos": [128, 384] },
+            { "time": 16, "pos": [128, 128] },
+            { "time": 18, "pos": [384, 128] },
+            { "time": 20, "pos": [384, 384] },
+            { "time": 22, "pos": [128, 384] },
+            { "time": 24, "pos": [128, 128] },
+            { "time": 1e100, "pos": [192, 192] }
+        ],
+        "guns": [
+            { "time": 0, "gun": "none" },
+            { "time": 4.2, "gun": "classic" },
+            { "time": 1e100, "gun": "classic" }
+        ],
+        "subtitle": [
+            { "time": 0, "subtitle": "" },
+            { "time": 0.200, "subtitle": "This-" },
+            { "time": 0.500, "subtitle": "This is the" },
+            { "time": 1.200, "subtitle": "Fuckin'..." },
+            { "time": 2.000, "subtitle": "Tutorial song" },
+            { "time": 3.500, "subtitle": "Fuckin'..." },
+            { "time": 4.200, "subtitle": "Left click to shoot" },
+            { "time": 5.900, "subtitle": "Right click to..." },
+            { "time": 6.900, "subtitle": "Right click to... reload" },
+            { "time": 7.600, "subtitle": "" },
+            { "time": 8.000, "subtitle": "*Inhales*" },
+            { "time": 8.400, "subtitle": "" },
+            { "time": 8.700, "subtitle": "uhhh..." },
+            { "time": 9.200, "subtitle": "I think it's..." },
+            { "time": 9.800, "subtitle": "..." },
+            { "time": 10.300, "subtitle": "P?" },
+            { "time": 10.750, "subtitle": "" },
+            { "time": 11.100, "subtitle": "*Inhales*" },
+            { "time": 11.800, "subtitle": "P to-..." },
+            { "time": 12.400, "subtitle": "Ski-" },
+            { "time": 12.600, "subtitle": "hhh" },
+            { "time": 13.000, "subtitle": "Skip to the end of the song?" },
+            { "time": 14.200, "subtitle": "I don't fuckin' know" },
+            { "time": 15.100, "subtitle": "*Inhales*" },
+            { "time": 15.900, "subtitle": "That's..." },
+            { "time": 16.300, "subtitle": "That's the tutorial" },
+            { "time": 17.200, "subtitle": "Fuck you" },
+            { "time": 17.700, "subtitle": "" },
+            { "time": 1e100, "subtitle": "" }
+        ]
+    },
+    "baby_tutorial": {
+        "music": "audio/music/tutorial_censor.mp3",
+        "prev": "audio/music/tutorial_censor.mp3",
+        "artist": "WaspVentMan",
+        "name": "Tutorial (Censored)",
+        "cover": "img/ante iudicium doceo.png",
+        "background": "img/ante iudicium doceo.png",
+        "link": [
+            {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
+        ],
+        "leaderboards": [
+            13853, //score
+            13852, //combo
+            13851  //acc
+        ],
+        "chart": [
+            { "time": 0, "pos": [128, 128] },
+            { "time": 2, "pos": [384, 128] },
+            { "time": 4, "pos": [384, 384] },
+            { "time": 6, "pos": [128, 384] },
+            { "time": 8, "pos": [128, 128] },
+            { "time": 10, "pos": [384, 128] },
+            { "time": 12, "pos": [384, 384] },
+            { "time": 14, "pos": [128, 384] },
+            { "time": 16, "pos": [128, 128] },
+            { "time": 18, "pos": [384, 128] },
+            { "time": 20, "pos": [384, 384] },
+            { "time": 22, "pos": [128, 384] },
+            { "time": 24, "pos": [128, 128] },
+            { "time": 1e100, "pos": [192, 192] }
+        ],
+        "guns": [
+            { "time": 0, "gun": "none" },
+            { "time": 4.2, "gun": "classic" },
+            { "time": 1e100, "gun": "classic" }
+        ],
+        "subtitle": [
+            { "time": 0, "subtitle": "" },
+            { "time": 0.200, "subtitle": "This-" },
+            { "time": 0.500, "subtitle": "This is the" },
+            { "time": 1.200, "subtitle": "####in'..." },
+            { "time": 2.000, "subtitle": "Tutorial song" },
+            { "time": 3.500, "subtitle": "####in'..." },
+            { "time": 4.200, "subtitle": "Left click to shoot" },
+            { "time": 5.900, "subtitle": "Right click to..." },
+            { "time": 6.900, "subtitle": "Right click to... reload" },
+            { "time": 7.600, "subtitle": "" },
+            { "time": 8.000, "subtitle": "*Inhales*" },
+            { "time": 8.400, "subtitle": "" },
+            { "time": 8.700, "subtitle": "uhhh..." },
+            { "time": 9.200, "subtitle": "I think it's..." },
+            { "time": 9.800, "subtitle": "..." },
+            { "time": 10.300, "subtitle": "P?" },
+            { "time": 10.750, "subtitle": "" },
+            { "time": 11.100, "subtitle": "*Inhales*" },
+            { "time": 11.800, "subtitle": "P to-..." },
+            { "time": 12.400, "subtitle": "Ski-" },
+            { "time": 12.600, "subtitle": "hhh" },
+            { "time": 13.000, "subtitle": "Skip to the end of the song?" },
+            { "time": 14.200, "subtitle": "I don't ####in' know" },
+            { "time": 15.100, "subtitle": "*Inhales*" },
+            { "time": 15.900, "subtitle": "That's..." },
+            { "time": 16.300, "subtitle": "That's the tutorial" },
+            { "time": 17.200, "subtitle": "#### you" },
+            { "time": 17.700, "subtitle": "" },
             { "time": 1e100, "subtitle": "" }
         ]
     }

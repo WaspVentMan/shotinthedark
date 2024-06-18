@@ -36,6 +36,8 @@ p {
     pointer-events: none;
     mix-blend-mode: difference;
 
+    transition: rotate 0.5s;
+
     z-index: 998;
 }
 

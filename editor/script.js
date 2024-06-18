@@ -1,5 +1,7 @@
-let musicPlayer = new Audio("../" + songs["KATAMARI"].music)
-let song = "KATAMARI"
+let songs = Object.assign({}, songsDONE, songsWIP)
+
+let musicPlayer = new Audio("../" + songs["tutorial"].music)
+let song = "tutorial"
 let startPos = 0
 const target = document.querySelector(".target")
 
@@ -114,8 +116,8 @@ function gameloop(){
     
     document.querySelector(".time").textContent = numeral(musicPlayer.currentTime).format("00:00") + " / " + numeral(musicPlayer.duration).format("00:00")
     document.querySelector(".name").textContent = songs[song].artist + " - " + songs[song].name
-    if (!document.querySelector(".light").src.includes(songs[song].art)){
-        document.querySelector(".light").src = "../" + songs[song].art + "#"
+    if (!document.querySelector(".light").src.includes(songs[song].background)){
+        document.querySelector(".light").src = "../" + songs[song].background + "#"
     }
 }
 

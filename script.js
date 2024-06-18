@@ -12,118 +12,7 @@ let select = [0, 1]
 let songs = songsDONE
 
 function allSongs(){
-    songs = Object.assign({}, songs, songsWIP)
-}
-
-const guns = {
-    "none": {
-        "ammo": [0, 0],
-        "auto": false,
-        "rate": 1e100,
-        "reload": 1e100,
-        "autoReload": false,
-        "name": "",
-        "spread": [0, 0],
-        "spreadRate": 0,
-        "scoreMult": 0,
-        "bullet": "",
-        "case": ""
-    },
-    "basic": {
-        "ammo": [17, 17],
-        "auto": true,
-        "rate": 160,
-        "reload": 750,
-        "autoReload": false,
-        "name": "Automatic Pistol",
-        "spread": [15, 50],
-        "spreadRate": 2,
-        "scoreMult": 1,
-        "reloadS": "audio/reload.mp3",
-        "bullet": "img/bullet.png",
-        "case": "img/case.png",
-        "img": "img/classic.png"
-    },
-    "classic": {
-        "ammo": [17, 17],
-        "auto": false,
-        "rate": 0,
-        "reload": 750,
-        "autoReload": false,
-        "name": "Manual Pistol",
-        "spread": [15, 50],
-        "spreadRate": 2,
-        "scoreMult": 1,
-        "reloadS": "audio/reload.mp3",
-        "bullet": "img/bullet.png",
-        "case": "img/case.png",
-        "img": "img/classic.png"
-    },
-    "pico": {
-        "ammo": [32, 32],
-        "auto": true,
-        "rate": 40,
-        "reload": 1000,
-        "autoReload": false,
-        "name": "Pico's MAC-10",
-        "spread": [29, 200],
-        "spreadRate": 7.5,
-        "scoreMult": 0.25,
-        "reloadS": "audio/reload.mp3",
-        "bullet": "img/bullet.png",
-        "case": "img/case.png",
-        "img": "img/pico.png"
-    },
-    "fortnite": {
-        "ammo": [7, 7],
-        "auto": false,
-        "rate": 40,
-        "reload": 1000,
-        "autoReload": false,
-        "name": "Hand Cannon",
-        "spread": [5, 200],
-        "spreadRate": 100,
-        "scoreMult": 4,
-        "bullet": "img/heavy.png",
-        "case": "img/heavycase.png",
-        "shootS": "audio/HC_shoot.mp3",
-        "reloadS": "audio/HC_reload.mp3",
-        "img": "img/classic.png"
-    },
-    "buckshot": {
-        "ammo": [6, 6],
-        "auto": false,
-        "rate": 400,
-        "reload": 1300,
-        "autoReload": false,
-        "name": "Shotgun",
-        "spread": [50, 500],
-        "spreadRate": 100,
-        "scoreMult": 0.5,
-        "buckshot": 10,
-        "bullet": "img/slug.png",
-        "case": "img/slug.png",
-        "shootS": "audio/HC_shoot.mp3",
-        "reloadS": "audio/HC_reload.mp3",
-        "img": "img/buckshot.png"
-    },
-    "rbuster": {
-        "ammo": [1, 1],
-        "auto": false,
-        "rate": 0,
-        "reload": 0,
-        "delay": 250,
-        "autoReload": true,
-        "name": "Rude Buster",
-        "spread": [29, 200],
-        "spreadRate": 35,
-        "scoreMult": 1,
-        "bullet": "img/none.png",
-        "case": "img/none.png",
-        "shootS": "audio/snd_rudebuster_swing.wav",
-        "reloadS": null,
-        "img": "img/rudeBust.png"
-    }
+    songs = Object.assign({}, songsDONE, songsWIP)
 }
 
 let gun = Object.keys(guns)[select[1]]
@@ -201,10 +90,10 @@ function songchange(value){
     musicPlayer.pause()
     musicPlayer = new Audio(songs[Object.keys(songs)[select[0]]].prev)
     musicPlayer.loop = true
-    musicPlayer.volume = volume[0]/1000
+    musicPlayer.volume = volume[0]/250
     musicPlayer.play()
 
-    document.querySelector(".songAAdisp").src = songs[Object.keys(songs)[select[0]]].art
+    document.querySelector(".songAAdisp").src = songs[Object.keys(songs)[select[0]]].cover
     document.querySelector(".songnamedisp").textContent = songs[Object.keys(songs)[select[0]]].name
     document.querySelector(".songartistdisp").textContent = songs[Object.keys(songs)[select[0]]].artist
 
@@ -227,17 +116,25 @@ function gunchange(value){
     } else {
         document.querySelector(".gunInfoMag").textContent = "Infinite"
     }
-    document.querySelector(".gunInfoMode").textContent = ["Manual", "Automatic"][guns[gun].auto+0]
+    
+    if (guns[gun].name == "Pistol"){
+        document.querySelector(".gunInfoMode").textContent = "M to toggle"
+    } else {
+        document.querySelector(".gunInfoMode").textContent = ["Manual", "Automatic"][guns[gun].auto+0]
+    }
+
     if (guns[gun].rate != 0){
         document.querySelector(".gunInfoRate").textContent = (1000/guns[gun].rate) + "/s"
     } else {
         document.querySelector(".gunInfoRate").textContent = "Unlimited"
     }
+
     if (guns[gun].reload != 0){
     document.querySelector(".gunInfoReload").textContent = (guns[gun].reload/1000) + "s"
     } else {
         document.querySelector(".gunInfoReload").textContent = "None"
     }
+
     document.querySelector(".gunInfoAcc").textContent = guns[gun].spread[0] + " (" + guns[gun].spread[1] + ")"
     document.querySelector(".gunInfoAccDec").textContent = guns[gun].spreadRate
     document.querySelector(".gunInfoScore").textContent = guns[gun].scoreMult + "x"
@@ -409,13 +306,16 @@ function gameloop(){
             flashForward += 25/2
         }
 
-        player.spread -= 2
-       
-        if (player.spread < player.gun.spread[0]){
-            player.spread = player.gun.spread[0]
-        } else
         if (player.spread > player.gun.spread[1]){
             player.spread = player.gun.spread[1]
+        }
+       
+        if (player.spread < player.gun.spread[0]-1){
+            player.spread += 2
+        } else if (player.spread > player.gun.spread[0]+1){
+            player.spread -= 2
+        } else {
+            player.spread = player.gun.spread[0]
         }
     }
 
@@ -459,6 +359,16 @@ function gameloop(){
             player.reload = false
     
             gunInit()
+        }
+    }
+
+    if (key["m"] && player.gun.name == "Pistol"){
+        if (player.gun.auto){
+            player.gun.auto = false
+            player.gun.rate = 0
+        } else {
+            player.gun.auto = true
+            player.gun.rate = 160
         }
     }
 
@@ -903,8 +813,8 @@ function gameloop(){
     } else {
         document.querySelector(".lbmode").textContent = ""
     }
-    if (!document.querySelector(".light").src.includes(songs[Object.keys(songs)[select[0]]].art)){
-        document.querySelector(".light").src = songs[Object.keys(songs)[select[0]]].art + "#"
+    if (!document.querySelector(".light").src.includes(songs[Object.keys(songs)[select[0]]].background)){
+        document.querySelector(".light").src = songs[Object.keys(songs)[select[0]]].background
     }
 }
 
@@ -918,12 +828,18 @@ setInterval(function(){
         document.querySelector(".crosshair").style.width = player.spread + "px"
         document.querySelector(".crosshair").style.top = (mousePos[1] -(player.spread/2)) + "px"
         document.querySelector(".crosshair").style.left = (mousePos[0] -(player.spread/2)) + "px" 
-        document.querySelector(".crosshair").style.rotate = "0deg"   
+
+        if (document.querySelector(".crosshair").style.rotate != "0deg"){
+            document.querySelector(".crosshair").style.rotate = "0deg"
+        }
 
         if (player.gun.name == ""){
-            document.querySelector(".crosshair").style.rotate = "45deg"
             document.querySelector(".crosshair").style.height = "10px"
             document.querySelector(".crosshair").style.width = "10px"
+
+            if (document.querySelector(".crosshair").style.rotate != "45deg"){
+                document.querySelector(".crosshair").style.rotate = "45deg"
+            }
         }
     } else {
         document.querySelector(".crosshair").style.height = guns[gun].spread[0] + "px"
