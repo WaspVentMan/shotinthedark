@@ -29,27 +29,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
 <body style="margin: 0%;">
-    <div style="display: flex; width: 1024px;">
-        <div style="width: 512px; height: 512px; overflow: hidden; text-align: left; background-color: white; background-image: url('../img/rgb.png');">
-            <img class="light" draggable="false" src="../img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
-            <img class="target" draggable="false" src="../img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
-            <p class="subtitle" style="position: absolute; width: 512px; top: 512px;"></p>
-        </div>
-        <div style="width: 512px;">
-            <div class="songdata" style="width: 512px; height: 512px; overflow-y: scroll; background-color: black;"></div>
-            <button onclick="pushBlank()">PUSH BLANK</button><button onclick="populateSongData()">REFRESH SONG DATA</button><button onclick="renderSongData()">RENDER SONG DATA</button>
+    <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-color: white; background-image: url('../img/rgb.png');">
+        <img class="light" draggable="false" src="../img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
+        <img class="target" draggable="false" src="../img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
+        <p class="subtitle" style="position: absolute; width: 512px; bottom: 512px;"></p>
         
-            <h1>EDITOR</h1>
-            <h3 class="name">SONGNAME</h3>
-            <p class="time"></p><br>
-            <p>SONG</p>
-            <input type="text" class="songID" value="KATAMARI"><br>
-            <button onclick="song = document.querySelector('.songID').value; populateSongData()">CHANGE SONG</button><br><br>
-            <p>SET SONG TIME</p>
-            <input type="number" oninput="startPos = this.value" value="0" step="0.1"><br>
-            <button onclick="setMusic()">PLAY FROM HERE</button><br>
-            <button onclick="musicPlayer.pause()">PAUSE</button><button onclick="musicPlayer.play()">PLAY</button>
-        </div>
+    </div>
+    <div class="songdata" style="position: absolute; left: 512px; width: 512px; height: 512px; overflow-y: scroll; background-color: black;"></div>
+    <div style="position: absolute; top: 512px; left: 0px; width: 512px;">
+        <h1>EDITOR</h1>
+        <h3 class="name">SONGNAME</h3>
+        <p class="time"></p><br>
+        <p>SONG</p>
+        <input type="text" class="songID" value="KATAMARI"><br>
+        <button onclick="song = document.querySelector('.songID').value; populateSongData()">CHANGE SONG</button><br><br>
+        <p>SET SONG TIME</p>
+        <input type="number" oninput="startPos = this.value" value="0" step="0.1"><br>
+        <button onclick="setMusic()">PLAY FROM HERE</button><br>
+        <button onclick="musicPlayer.pause()">PAUSE</button><button onclick="musicPlayer.play()">PLAY</button>
+        <br>
+        <br>
+        <p>IMPORT CUSTOM SONGS</p>
+        <p>Enter the link to the song you want to import</p>
+        <p>i.e.: "https://waspventman.co.uk/temp/test.json"</p>
+        <input type="text" style="color: black; width: 90%;" class="customImport">
+        <div onclick="importSongs(document.querySelector('.customImport').value)">IMPORT SONGS!</div>
+        <p>Song assets may take some time loading in depending on your internet speed, please be patient :)</p>
+    </div>
+    <div style="position: absolute; top: 512px; left: 512px; width: 512px;">
+        <button onclick="pushBlank()">PUSH BLANK</button>
+        <button onclick="populateSongData()">REFRESH SONG DATA</button>
+        <button onclick="renderSongData()">RENDER SONG DATA</button>
+        <br><br>
+        <button onclick="renderSongData(); document.querySelector('.dataOut').textContent = JSON.stringify(songs[song])">EXPORT DATA</button>
+        <p>OUTPUT</p>
+        <p class="dataOut" style="width: 512px; height: min-content; background-color: black; color: white; overflow-y: hidden; overflow-x: scroll; text-wrap: nowrap;">data goes here</p>
+        <button onclick="navigator.clipboard.writeText(document.querySelector('.dataOut').textContent)">COPY</button>
     </div>
 
     <script src="../songs.js"></script>

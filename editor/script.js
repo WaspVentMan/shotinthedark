@@ -5,6 +5,14 @@ let song = "tutorial"
 let startPos = 0
 const target = document.querySelector(".target")
 
+async function importSongs(url){
+    let newSongs = await (await fetch(url)).json()
+
+    songs = Object.assign({}, newSongs, songs)
+
+    console.log(`Successfully imported ${Object.keys(newSongs).length} new song(s)`)
+}
+
 function setMusic(){
     musicPlayer.pause()
     musicPlayer = new Audio("../" + songs[song].music)

@@ -129,7 +129,7 @@
             <p class="gundispname" style="position: absolute; bottom: 118px; right: -118px; width: 256px; rotate: 90deg; text-align: right; height: 20px;">Shotgun</p>
         </div>
     </div>
-    <div class="settingsScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; display: none;">
+    <div class="settingsScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; display: none; overflow-y: scroll;">
         <h1>THE SETTINGS MENU I MADE IN LIKE 5 MINUTES</h1>
         <p onclick="document.querySelector('.settingsScreen').style.display = 'none'">BACK</p>
         <br>
@@ -161,19 +161,29 @@
         }
         songchange(0)
         ">OFF</p>
+        <br>
+        <p>IMPORT CUSTOM SONGS</p>
+        <p>Enter the link to the song you want to import</p>
+        <p>i.e.: "https://waspventman.co.uk/temp/test.json"</p>
+        <input type="text" style="color: black; width: 90%;" class="customImport">
+        <div onclick="importSongs(document.querySelector('.customImport').value)">IMPORT SONGS!</div>
+        <p>Song assets may take some time loading in depending on your internet speed, please be patient :)</p>
+        <br><br>
+        <a href="./editor/" target="_blank">LEVEL EDITOR</a>
     </div>
 
     <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.'){songchange(0); this.style.display = 'none'}">
         <br>
         <h1 style="mix-blend-mode: difference;">SHOTS IN THE DARK</h1>
         <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>
-        <div style="display: none;">
+        <div class="loadZone" style="display: none;">
             <img src="img/ebe.png">
             <audio preload="auto" src="audio/music/amalgam.mp3"></audio>
             <audio preload="auto" src="audio/music/KATAMARI.mp3"></audio>
             <audio preload="auto" src="audio/KATAMARI_prev.mp3"></audio>
             <audio preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
             <audio preload="auto" src="audio/music/tutorial.mp3"></audio>
+            <audio preload="auto" src="audio/music/tutorial_censor.mp3"></audio>
             <audio preload="auto" src="audio/Boot Sequence.mp3"></audio>
             <audio preload="auto" src="audio/HC_reload.mp3"></audio>
             <audio preload="auto" src="audio/HC_shoot.mp3"></audio>
@@ -194,7 +204,7 @@
             <img src="img/crossTC.png">
             <img src="img/crossTL.png">
             <img src="img/crossTR.png">
-            <img src="img/fear.png">
+            <img src="img/ante iudicium doceo.png">
             <img src="img/Femtanyl - KATAMARI.png">
             <img src="img/heavy.png">
             <img src="img/heavycase.png">

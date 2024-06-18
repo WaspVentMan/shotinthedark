@@ -506,7 +506,7 @@ const songsWIP = {
             { "time": 60.509, "subtitle": "TILL I DROP COLD DEAD" },
             { "time": 61.220, "subtitle": "FROM THE CLOT IN MY BRAIN" },
 
-            // Unfinished, retime lines 1-4
+            //Unfinished, retime lines 1-4
             { "time": 62.000, "subtitle": "I'M MADE OF DEAD MEAT" },
             { "time": 63.000, "subtitle": "AND I GOT NO TASTE" },
             { "time": 64.000, "subtitle": "AND I WONT LET UP TILL I GET MY WAY" },
@@ -561,11 +561,11 @@ const songsWIP = {
             { "time": 97.250, "subtitle": "GO ON LOOSE YOUR SELF CONTROL" },
             { "time": 98.750, "subtitle": "GOT NO PLACE I'D RATHER GO" },
 
-            // DUET!
+            //DUET!
             { "time": 99.900, "subtitle": "<p style=\"color: cyan\">- - - I LOST MY MIND</p><p>CAUSE I LOST MY MIND</p>" },
             { "time": 100.760, "subtitle": "<p style=\"color: cyan\">IN LATE SEPTEMBER</p><p>IN LATE SEPTEMBER</p>" },
 
-            // Unfinished, retime lines
+            //Unfinished, retime lines
             { "time": 102.760, "subtitle": "<p style=\"color: cyan\">DIAL NUMBERS WATCH YOUR TONE</p><p>DIAL NUMBERS WATCH YOUR TONE</p>" },
             { "time": 104.760, "subtitle": "<p style=\"color: cyan\">CLOCKWORK WIND UP ALL ALONE</p><p>CLOCKWORK WIND UP ALL ALONE</p>" },
             { "time": 105.760, "subtitle": "<p style=\"color: cyan\">THE MORE YOU STOP THE MORE I GO</p><p>THE MORE YOU STOP THE MORE I GO</p>" },
@@ -576,7 +576,7 @@ const songsWIP = {
             { "time": 110.000, "subtitle": "<p style=\"color: cyan\">I'M RUNNING OUT OF WAYS TO COPE</p><p>I'M RUNNING OUT OF WAYS TO COPE</p>" },
             { "time": 111.322, "subtitle": "<p style=\"color: cyan\">SO I BITE THE HAND THAT FEEDS ME</p><p>SO I BITE THE HAND THAT FEEDS ME</p>" },
             { "time": 112.515, "subtitle": "<p style=\"color: cyan\">LOOSE MY</p><p>LOOSE MY</p>" },
-            // DUET END!
+            //DUET END!
 
             { "time": 112.939, "subtitle": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" },
             { "time": 116.878, "subtitle": "WHAT THE FUCK IS WRONG WITH YOU" },
@@ -607,7 +607,7 @@ const songsWIP = {
         "cover": "img/cover_UUFO.png",
         "background": "img/cover_UUFO.png",
         "link": [
-            {"url": "https://cametek.bandcamp.com/track/mystery-circles-ultra-u-u-f-o", "type": "BC"},
+            {"url": "https:cametek.bandcamp.com/track/mystery-circles-ultra-u-u-f-o", "type": "BC"},
         ],
         "leaderboards": null,
         "chart": [
@@ -634,7 +634,7 @@ const songsXTRA = {
         "cover": "img/ante iudicium doceo.png",
         "background": "img/ante iudicium doceo.png",
         "link": [
-            {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
+            {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
         ],
         "leaderboards": [
             13853, //score
@@ -702,7 +702,7 @@ const songsXTRA = {
         "cover": "img/ante iudicium doceo.png",
         "background": "img/ante iudicium doceo.png",
         "link": [
-            {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
+            {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
         ],
         "leaderboards": [
             13853, //score
@@ -734,9 +734,9 @@ const songsXTRA = {
             { "time": 0, "subtitle": "" },
             { "time": 0.200, "subtitle": "This-" },
             { "time": 0.500, "subtitle": "This is the" },
-            { "time": 1.200, "subtitle": "####in'..." },
+            { "time": 1.200, "subtitle": "<b style=\"background-color: white\">####</b>in'..." },
             { "time": 2.000, "subtitle": "Tutorial song" },
-            { "time": 3.500, "subtitle": "####in'..." },
+            { "time": 3.500, "subtitle": "<b style=\"background-color: white\">####</b>in'..." },
             { "time": 4.200, "subtitle": "Left click to shoot" },
             { "time": 5.900, "subtitle": "Right click to..." },
             { "time": 6.900, "subtitle": "Right click to... reload" },
@@ -753,11 +753,11 @@ const songsXTRA = {
             { "time": 12.400, "subtitle": "Ski-" },
             { "time": 12.600, "subtitle": "hhh" },
             { "time": 13.000, "subtitle": "Skip to the end of the song?" },
-            { "time": 14.200, "subtitle": "I don't ####in' know" },
+            { "time": 14.200, "subtitle": "I don't <b style=\"background-color: white\">####</b>in' know" },
             { "time": 15.100, "subtitle": "*Inhales*" },
             { "time": 15.900, "subtitle": "That's..." },
             { "time": 16.300, "subtitle": "That's the tutorial" },
-            { "time": 17.200, "subtitle": "#### you" },
+            { "time": 17.200, "subtitle": "<b style=\"background-color: white\">####</b> you" },
             { "time": 17.700, "subtitle": "" },
             { "time": 1e100, "subtitle": "" }
         ]

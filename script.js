@@ -15,6 +15,14 @@ function allSongs(){
     songs = Object.assign({}, songsDONE, songsWIP)
 }
 
+async function importSongs(url){
+    let newSongs = await (await fetch(url)).json()
+
+    songs = Object.assign({}, newSongs, songs)
+
+    console.log(`Successfully imported ${Object.keys(newSongs).length} new song(s)`)
+}
+
 let gun = Object.keys(guns)[select[1]]
 let musicPlayer = new Audio(songs["tutorial"].music)
 let flashForward = 100
@@ -695,8 +703,6 @@ function gameloop(){
             document.querySelector(".endCombo").textContent = "x" + numeral(player.bestcombo).format("0,0")
             document.querySelector(".endAcc").textContent = numeral(player.acc).format("0.00%")
 
-            document.querySelector(".endRank").innerHTML = "<img src=\"img/rankF.png\">"
-
             document.querySelector(".scoreleader").innerHTML = ""
             for (let rank = 0; rank < 5; rank++){
                 if (rank < boards.score.length){
@@ -736,20 +742,22 @@ function gameloop(){
                 }
             }
 
-            if (player.acc >= 0.3){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankD.png\">"
-            }
-            if (player.acc >= 0.6){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankC.png\">"
-            }
-            if (player.acc >= 0.8){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankB.png\">"
-            }
-            if (player.acc >= 0.9){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankA.png\">"
-            }
             if (player.acc >= 0.95){
                 document.querySelector(".endRank").innerHTML = "<img src=\"img/rankS.png\">"
+            } else if (player.acc >= 0.9){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankA.png\">"
+            } else if (player.acc >= 0.8){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankB.png\">"
+            } else if (player.acc >= 0.6){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankC.png\">"
+            } else if (player.acc >= 0.3){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankD.png\">"
+            } else {
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankF.png\">"
+                musicPlayer.pause()
+                let voicePlayer = new Audio("audio/rank_F_talk.mp3")
+                voicePlayer.volume = volume[1]/100
+                voicePlayer.play()
             }
         }, 2650)
 
