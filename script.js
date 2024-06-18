@@ -754,7 +754,9 @@ function gameloop(){
                 document.querySelector(".endRank").innerHTML = "<img src=\"img/rankD.png\">"
             } else {
                 document.querySelector(".endRank").innerHTML = "<img src=\"img/rankF.png\">"
-                musicPlayer.pause()
+
+                musicPlayer.volume = 0.01
+
                 let voicePlayer = new Audio("audio/rank_F_talk.mp3")
                 voicePlayer.volume = volume[1]/100
                 voicePlayer.play()
