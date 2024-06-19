@@ -691,6 +691,7 @@ const songsXTRA = {
             { "time": 16.300, "subtitle": "That's the tutorial" },
             { "time": 17.200, "subtitle": "Fuck you" },
             { "time": 17.700, "subtitle": "" },
+            { "time": 18, "subtitle": "<img src='https://static.wikia.nocookie.net/smiling-friends/images/a/ad/Mrlandlord.png/revision/latest?cb=20240611215700' style='height: 400px'><br>I was just wondering if you wanted to HANG out with me and smoke weed and fill our bellies with DIET soda and play Burnout: Revenge for the PS2?"},
             { "time": 1e100, "subtitle": "" }
         ]
     },

@@ -1,4 +1,4 @@
-let songs = Object.assign({}, songsDONE, songsWIP)
+let songs = Object.assign({}, songsDONE, songsWIP, songsXTRA)
 
 let musicPlayer = new Audio("../" + songs["tutorial"].music)
 let song = "tutorial"
@@ -11,6 +11,10 @@ async function importSongs(url){
     songs = Object.assign({}, newSongs, songs)
 
     console.log(`Successfully imported ${Object.keys(newSongs).length} new song(s)`)
+}
+
+function importSong(data){
+    songs = Object.assign({}, data, songs)
 }
 
 function setMusic(){
@@ -34,19 +38,14 @@ function populateSongData(){
 
     for (let x = 0; x < songs[song].chart.length; x++){
         let temp = document.createElement("div")
-        temp.className = "gap" + x
-        songData.appendChild(temp)
-        
-        temp = document.createElement("div")
         let diff = 0
 
         if (x != 0){
             diff = songs[song].chart[x].time-songs[song].chart[x-1].time
         }
 
-        temp.className = "gap" + (x+1)
         temp.innerHTML = `
-        <input type="number" class="songtime${x}" value="${Math.round(diff*1000)/1000}">
+        <input type="number" class="songtime${x}" style="width: 10%;" value="${Math.round(diff*1000)/1000}">
         <input type="number" class="songposx${x}" value="${songs[song].chart[x].pos[0]}">
         <input type="number" class="songposy${x}" value="${songs[song].chart[x].pos[1]}">`
 
@@ -58,14 +57,64 @@ function populateSongData(){
             songData.appendChild(temp)
         }
     }
+
+    let subData = document.querySelector(".lyricdata")
+    subData.innerHTML = ""
+
+    for (let x = 0; x < songs[song].subtitle.length; x++){
+        let temp = document.createElement("div")
+        let diff = 0
+
+        if (x != 0){
+            diff = songs[song].subtitle[x].time-songs[song].subtitle[x-1].time
+        }
+
+        temp.className = "gap" + (x+1)
+        temp.innerHTML = `
+        <input type="number" class="lyrictime${x}" style="width: 10%;" value="${Math.round(diff*1000)/1000}">
+        <input type="text" class="lyriclyric${x}" style="width: 80%; text-align: left;" value="${songs[song].subtitle[x].subtitle.replaceAll("\"", "'")}">`
+
+        subData.appendChild(temp)
+
+        if (x+1 == songs[song].chart.length){
+            temp = document.createElement("div")
+            temp.className = "gap" + (x+1)
+            subData.appendChild(temp)
+        }
+    }
+
+    let gunData = document.querySelector(".gundata")
+    gunData.innerHTML = ""
+
+    for (let x = 0; x < songs[song].guns.length; x++){
+        let temp = document.createElement("div")
+        let diff = 0
+
+        if (x != 0){
+            diff = songs[song].guns[x].time-songs[song].guns[x-1].time
+        }
+
+        temp.className = "gap" + (x+1)
+        temp.innerHTML = `
+        <input type="number" class="guntime${x}" style="width: 10%;" value="${Math.round(diff*1000)/1000}">
+        <input type="text" class="gungun${x}" style="width: 80%; text-align: left;" value="${songs[song].guns[x].gun}">`
+
+        gunData.appendChild(temp)
+
+        if (x+1 == songs[song].chart.length){
+            temp = document.createElement("div")
+            temp.className = "gap" + (x+1)
+            gunData.appendChild(temp)
+        }
+    }
 }
 
 function renderSongData(){
     let songData = document.querySelector(".songdata")
+
     let newData = []
     let time = 0
-
-    for (let x = 0; x < (songData.children.length/2)-1; x++){
+    for (let x = 0; x < songData.children.length-1; x++){
         let temp = {"pos":[0,0]}
 
         time += parseFloat(document.querySelector(`.songtime${x}`).value)
@@ -77,23 +126,74 @@ function renderSongData(){
     }
 
     songs[song].chart = newData
-}
 
-function pushBlank(){
-    renderSongData()
-    let songData = document.querySelector(".songdata")
-    let temp = {"pos":[0,0]}
-    let time = 0
+    newData = []
+    time = 0
+    let subData = document.querySelector(".lyricdata")
 
-    for (let x = 0; x < (songData.children.length/2)-1; x++){
-        time += parseFloat(document.querySelector(`.songtime${x}`).value)
+    for (let x = 0; x < subData.children.length-1; x++){
+        let temp = {}
+
+        time += parseFloat(document.querySelector(`.lyrictime${x}`).value)
+        temp.time = Math.round(time*1000)/1000
+        temp.subtitle = document.querySelector(`.lyriclyric${x}`).value
+
+        newData.push(temp)
     }
 
-    temp.time = time
-    temp.pos[0] = 0
-    temp.pos[1] = 0
 
-    songs[song].chart.push(temp)
+    songs[song].subtitle = newData
+
+    newData = []
+    time = 0
+    let gunData = document.querySelector(".gundata")
+
+    for (let x = 0; x < gunData.children.length-1; x++){
+        let temp = {}
+
+        try{
+            time += parseFloat(document.querySelector(`.guntime${x}`).value)
+            temp.time = Math.round(time*1000)/1000
+            temp.gun = document.querySelector(`.gungun${x}`).value
+        } catch {break}
+
+        newData.push(temp)
+    }
+
+    console.log(newData)
+    
+    songs[song].guns = newData
+}
+
+function pushBlank(loc){
+    if (loc == ".songdata"){
+        let temp = {"pos":[0,0]}
+
+        temp.time = 0
+        temp.pos[0] = 0
+        temp.pos[1] = 0
+
+        songs[song].chart.push(temp)
+    }
+
+    if (loc == ".lyricdata"){
+        let temp = {}
+
+        temp.time = 0
+        temp.subtitle = ""
+
+        songs[song].subtitle.push(temp)
+    }
+
+    if (loc == ".gundata"){
+        let temp = {}
+
+        temp.time = 0
+        temp.gun = ""
+
+        songs[song].guns.push(temp)
+    }
+
     populateSongData()
 }
 
@@ -123,7 +223,9 @@ function gameloop(){
     }
     
     document.querySelector(".time").textContent = numeral(musicPlayer.currentTime).format("00:00") + " / " + numeral(musicPlayer.duration).format("00:00")
-    document.querySelector(".name").textContent = songs[song].artist + " - " + songs[song].name
+    document.querySelector(".title").value = songs[song].name
+    document.querySelector(".name").value = songs[song].artist
+
     if (!document.querySelector(".light").src.includes(songs[song].background)){
         document.querySelector(".light").src = "../" + songs[song].background + "#"
     }
