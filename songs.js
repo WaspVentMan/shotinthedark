@@ -622,7 +622,9 @@ const songsWIP = {
             { "time": 0, "subtitle": "" },
             { "time": 1e100, "subtitle": "" }
         ]
-    }
+    },
+    "hellobpm2021": {"music":"audio/music/Hello (BPM) 2021.mp3","prev":"audio/music/Hello (BPM) 2021.mp3","artist":"かめりあ(Camellia)","name":"Hello (BPM) 2021","cover":"img/cover_UUFO.png","background":"img/cover_UUFO.png","link":[],"leaderboards":[],"chart":[],"guns":[],"subtitle":[]},
+    "browntown": {"music":"audio/music/BROWN TOWN SONG.mp3","prev":"audio/music/BROWN TOWN SONG.mp3","artist":"Jarrad Wright","name":"BROWN TOWN SONG","cover":"img/biglez.png","background":"img/biglez.png","link":[],"leaderboards":[],"chart":[{"pos":[0,0],"time":0},{"pos":[0,0],"time":1e+100}],"guns":[{"time":0,"gun":"none"},{"time":1e+100,"gun":"none"}],"subtitle":[{"time":0,"subtitle":""},{"time":0.9,"subtitle":"This one goes a little something..."},{"time":2.1,"subtitle":""},{"time":2.7,"subtitle":"like this"},{"time":3.7,"subtitle":""},{"time":8.1,"subtitle":"Goin' around fucken brown town town"},{"time":10.1,"subtitle":"fucking around fucken signin about"},{"time":12.1,"subtitle":""},{"time":12.4,"subtitle":"mmmmmhmm"},{"time":13.4,"subtitle":""},{"time":14.3,"subtitle":"mmmmmmm"},{"time":16,"subtitle":"It's a pretty good town mate"},{"time":18,"subtitle":""},{"time":21,"subtitle":"Sass mate come up to me and he says..."},{"time":23.5,"subtitle":"Wanna go fishin Lez?"},{"time":25.5,"subtitle":"And I said you know what"},{"time":27.5,"subtitle":"why not?"},{"time":28.5,"subtitle":""},{"time":29.5,"subtitle":"So we popped down the jetty"},{"time":31.5,"subtitle":""},{"time":32,"subtitle":"Fuckin hopped in the tinnie"},{"time":34,"subtitle":""},{"time":34,"subtitle":""},{"time":1e+100,"subtitle":""}]}
 }
 
 const songsXTRA = {

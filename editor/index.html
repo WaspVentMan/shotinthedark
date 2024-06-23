@@ -65,6 +65,16 @@
             <p>Artist(s) Name(s)</p>
             <input class="title" style="width: 90%; margin: auto;" type="text">
             <input class="name" style="width: 90%; margin: auto;" type="text">
+            <p></p><p></p>
+            <p>Song URL</p>
+            <p>Preview URL</p>
+            <input class="song" style="width: 90%; margin: auto;" type="text">
+            <input class="prev" style="width: 90%; margin: auto;" type="text">
+            <p></p><p></p>
+            <p>Cover URL</p>
+            <p>Background URL</p>
+            <input class="cover" style="width: 90%; margin: auto;" type="text">
+            <input class="back" style="width: 90%; margin: auto;" type="text">
         </div>
         <br>
         <p>Playback</p>
@@ -83,15 +93,27 @@
         <p>OUTPUT DATA</p>
         <p class="dataOut" style="width: 512px; height: min-content; background-color: black; color: white; overflow-y: hidden; overflow-x: scroll; text-wrap: nowrap;">data goes here</p>
         <button onclick='renderSongData(); document.querySelector(".dataOut").textContent = `{\"${song}\": ${JSON.stringify(songs[song])}}`'>OUTPUT SONG DATA</button>
-        <button onclick="navigator.clipboard.writeText(document.querySelector('.dataOut').textContent)">COPY</button>
+        <button onclick="navigator.clipboard.writeText(document.querySelector('.dataOut').textContent)">COPY</button><br><br>
 
         <p>INPUT DATA</p>
-        <input class="dataIn" style="width: 90%;">
-        <button onclick="importSong(document.querySelector('.dataIn').value)">LOAD</button>
+        <input class="dataIn" style="width: 90%;"><br>
+        <button onclick="importSong(document.querySelector('.dataIn').value)">LOAD</button><br><br>
+
+        <p>NEW SONG</p>
+        <input type="text" class="songIDgen"><br>
+        <button onclick="pushBlankSong(document.querySelector('.songIDgen').value)">NEW SONG</button><br><br>
 
         <p>LOAD EXISTING SONG</p>
         <input type="text" class="songID" value="KATAMARI"><br>
         <button onclick="song = document.querySelector('.songID').value; populateSongData()">CHANGE SONG</button><br><br>
+
+        <details>
+            <summary>ALL LOADED SONG IDs (A-Z, a-z)</summary>
+            <button onclick="listAllSongs()">REFRESH</button>
+            <div class="allsongs"></div>
+        </details>
+
+        <br>
         
         <p>LOAD CUSTOM SONGS</p>
         <p>Enter the link to the song you want to import</p>

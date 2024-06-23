@@ -1,3 +1,17 @@
+const blankSong = {
+    "music": "",
+    "prev": "",
+    "artist": "",
+    "name": "",
+    "cover": "",
+    "background": "",
+    "link": [],
+    "leaderboards": [],
+    "chart": [],
+    "guns": [],
+    "subtitle": []
+}
+
 let songs = Object.assign({}, songsDONE, songsWIP, songsXTRA)
 
 let musicPlayer = new Audio("../" + songs["tutorial"].music)
@@ -19,7 +33,13 @@ function importSong(data){
 
 function setMusic(){
     musicPlayer.pause()
-    musicPlayer = new Audio("../" + songs[song].music)
+
+    if (songs[song].music.startsWith("https://")) {
+        musicPlayer = new Audio(songs[song].music)
+    } else {
+        musicPlayer = new Audio("../" + songs[song].music)
+    }
+    
     musicPlayer.currentTime = startPos
     musicPlayer.volume = 0.1 
     musicPlayer.play()
@@ -29,6 +49,13 @@ function songUpdateAhead(){
     while (x < songs[song].chart.length){
         songs[song].chart[x].time += inc
         x++
+    }
+}
+
+function listAllSongs(){
+    document.querySelector(".allsongs").innerHTML = ""
+    for (let x = 0; x < Object.keys(songs).length; x++){
+        document.querySelector(".allsongs").innerHTML += `<p>${Object.keys(songs).sort()[x]}</p>`
     }
 }
 
@@ -107,13 +134,21 @@ function populateSongData(){
             gunData.appendChild(temp)
         }
     }
+
+    document.querySelector(".title").value = songs[song].name
+    document.querySelector(".name").value = songs[song].artist
+    document.querySelector(".song").value = songs[song].music
+    document.querySelector(".prev").value = songs[song].prev
+    document.querySelector(".cover").value = songs[song].cover
+    document.querySelector(".back").value = songs[song].background
 }
 
 function renderSongData(){
-    let songData = document.querySelector(".songdata")
+    let newsong = songs[song]
 
     let newData = []
     let time = 0
+    let songData = document.querySelector(".songdata")
     for (let x = 0; x < songData.children.length-1; x++){
         let temp = {"pos":[0,0]}
 
@@ -125,12 +160,11 @@ function renderSongData(){
         newData.push(temp)
     }
 
-    songs[song].chart = newData
+    newsong.chart = newData
 
     newData = []
     time = 0
     let subData = document.querySelector(".lyricdata")
-
     for (let x = 0; x < subData.children.length-1; x++){
         let temp = {}
 
@@ -141,13 +175,11 @@ function renderSongData(){
         newData.push(temp)
     }
 
-
-    songs[song].subtitle = newData
+    newsong.subtitle = newData
 
     newData = []
     time = 0
     let gunData = document.querySelector(".gundata")
-
     for (let x = 0; x < gunData.children.length-1; x++){
         let temp = {}
 
@@ -160,9 +192,25 @@ function renderSongData(){
         newData.push(temp)
     }
 
-    console.log(newData)
+    newsong.guns = newData
+
+    newsong.name       = document.querySelector(".title").value
+    newsong.artist     = document.querySelector(".name").value
+    newsong.music      = document.querySelector(".song").value
+    newsong.prev       = document.querySelector(".prev").value
+    newsong.cover      = document.querySelector(".cover").value
+    newsong.background = document.querySelector(".back").value
     
-    songs[song].guns = newData
+    
+    console.log(newsong)
+    songs[song] = newsong
+}
+
+function pushBlankSong(name){
+    song = name
+    songs[name] = blankSong
+
+    populateSongData()
 }
 
 function pushBlank(loc){
@@ -223,9 +271,7 @@ function gameloop(){
     }
     
     document.querySelector(".time").textContent = numeral(musicPlayer.currentTime).format("00:00") + " / " + numeral(musicPlayer.duration).format("00:00")
-    document.querySelector(".title").value = songs[song].name
-    document.querySelector(".name").value = songs[song].artist
-
+    
     if (!document.querySelector(".light").src.includes(songs[song].background)){
         document.querySelector(".light").src = "../" + songs[song].background + "#"
     }
