@@ -9,217 +9,223 @@
     <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
-<body style="margin: 0; background-color: black;" oncontextmenu="return false" onload="load = true">
-    <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-color: white; background-image: url('img/rgb.png');">
-        <img class="light" draggable="false" src="img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
-        <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
-    </div>
-    <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
-        <div class="bullets"></div>
-        <img class="gundisp" src="img/buckshot.png" style="position: absolute; bottom: 20px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference;">
-        <p class="gunName" style="position: absolute; bottom: 138px; right: -118px; width: 256px; rotate: 90deg; text-align: right;"></p>
-        <div class="newTime" style="width: 512px; height: 4px; background-color: #fff; margin-bottom: 12px; mix-blend-mode: difference;"></div>
-        <div style="display: grid; grid-template-columns: 2fr 8fr; mix-blend-mode: difference; position: absolute; width: 512px;">
-            <div>
-                <p class="score" style="text-align: left; color: white; margin-left: 16px;"></p>
-                <p class="combo" style="text-align: left; color: white; margin-left: 16px;"></p>
-                <p class="acc" style="text-align: left; color: white; margin-left: 16px;"></p>
+<body style="margin: 0; background-image: url('img/bg.png'); height: 100vh; overflow: hidden;" oncontextmenu="return false" onload="load = true">
+    <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; top: calc(50% - 256px); left: calc(50% - 256px);">
+        <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-color: white; background-image: url('img/rgb.png');">
+            <img class="light" draggable="false" src="img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
+            <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
+        </div>
+        <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
+            <div class="bullets"></div>
+            <img class="gundisp" src="img/buckshot.png" style="position: absolute; bottom: 20px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference;">
+            <p class="gunName" style="position: absolute; bottom: 138px; right: -118px; width: 256px; rotate: 90deg; text-align: right;"></p>
+            <div class="newTime" style="width: 512px; height: 4px; background-color: #fff; margin-bottom: 12px; mix-blend-mode: difference;"></div>
+            <div style="display: grid; grid-template-columns: 2fr 8fr; mix-blend-mode: difference; position: absolute; width: 512px;">
+                <div>
+                    <p class="score" style="text-align: left; color: white; margin-left: 16px;"></p>
+                    <p class="combo" style="text-align: left; color: white; margin-left: 16px;"></p>
+                    <p class="acc" style="text-align: left; color: white; margin-left: 16px;"></p>
+                </div>
+                <div>
+                    <p class="name" style="text-align: right; color: white; margin-right: 16px;"></p>
+                    <p class="artistName" style="text-align: right; color: white; margin-right: 16px;"></p>
+                    <p class="time" style="text-align: right; color: white; margin-right: 16px;">0:00 / 0:00</p>
+                </div>
             </div>
-            <div>
-                <p class="name" style="text-align: right; color: white; margin-right: 16px;"></p>
-                <p class="artistName" style="text-align: right; color: white; margin-right: 16px;"></p>
-                <p class="time" style="text-align: right; color: white; margin-right: 16px;">0:00 / 0:00</p>
+            <p class="subtitle" style="position: absolute; text-align: center; bottom: 0%; left: 0%; width: 100%; height: max-content;"></p>
+        </div>
+        <div class="leaderboard" style="width: 512px; height: 512px; z-index: 102; position: absolute; display: none; background-color: black; text-align: center;">
+            <h1 class="lbTitle">Femtanyl - KATAMARI</h1>
+            <p class="lbmode"></p>
+            <br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; width: 512px;">
+                <div>
+                    <h1>RESULTS</h1>
+                    <br>
+                    <h1>SCORE</h1>
+                    <p class="endScore"></p>
+                    <br>
+                    <h1>COMBO</h1>
+                    <p class="endCombo"></p>
+                    <br>
+                    <h1>ACCURACY</h1>
+                    <p class="endAcc"></p>
+                    <br>
+                    <h1>GRADE</h1>
+                    <h1 class="endRank"></h1>
+                </div>
+                <div>
+                    <h1>LEADERBOARD</h1>
+                    <div style="width: 256px; height: 128px;">
+                        <p>Score</p>
+                        <div class="scoreleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
+                    </div>
+                    <div style="width: 256px; height: 128px;">
+                        <p>Combo</p>
+                        <div class="comboleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
+                    </div>
+                    <div style="width: 256px; height: 128px;">
+                        <p>Accuracy</p>
+                        <div class="accleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="position: absolute; bottom: 0%; left: 0%; width: 512px; height: 20px; text-align: center;" onclick="document.querySelector('.startScreen').style.display = 'block'; document.querySelector('.leaderboard').style.display = 'none'; songchange(0)">Main Menu</div>
+        </div>
+        <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;">
+            <br>
+            <p class="songnamedisp" style="height: min-content;">KATAMARI</p>
+            <p class="songartistdisp" style="margin-bottom: 4px;">Femtanyl</p>
+            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; grid-gap: 16px; margin-left: -80px;">
+                <img class="prevAAdisp" src="img/Femtanyl - KATAMARI.png" width="192" height="192" style="margin-top: 32px;">
+                <img class="songAAdisp" src="img/Femtanyl - KATAMARI.png" width="256" height="256">
+                <img class="nextAAdisp" src="img/Femtanyl - KATAMARI.png" width="192" height="192" style="margin-top: 32px;">
+            </div>
+            <div class="songLinks" style="height: 16px;"></div>
+            <div style="display: grid; grid-template-columns: 256px 256px; margin: auto; width: max-content;">
+                <div class="songSel" style="width: 512px;">
+                    <br>
+                    <p><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p><br>
+                    
+                    <div onclick="preview = false; init()">START</div>
+                    <div onclick="preview = true; init()">PREVIEW</div>
+                </div>
+                <div class="weaponSel" style="display: none;">
+                    <br>
+                    <p><b onclick="gunchange(-1)" style="margin: 8px;"><<<</b><b>GUN</b><b onclick="gunchange(1)" style="margin: 8px;">>>></b></p>
+                    <div style="display: grid; grid-template-columns: 8fr min-content 8fr; column-gap: 8px;">
+                        <p style="text-align: right;">Ammo</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoMag">32</p>
+                        <p style="text-align: right;">Mode</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoMode">25/s</p>
+                        <p style="text-align: right;">Rate</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoRate">25/s</p>
+                        <p style="text-align: right;">Rld</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoReload">0s</p>
+                        <p style="text-align: right;">Sprd</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoAcc">0-1</p>
+                        <p style="text-align: right;">Sp/s</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoAccDec">0/shot</p>
+                        <p style="text-align: right;">Pts X</p>
+                        <p>|</p>
+                        <p style="text-align: left;" class="gunInfoScore">0.25x</p>
+                    </div>
+                </div>
+            </div>
+            <p style="position: absolute; bottom: 0px; left: 0px;" onclick="document.querySelector('.settingsScreen').style.display = 'block'">SETTINGS</p>
+            <div style="position: absolute; width: 64px; bottom: 0%; right: calc(50% - 32px); height: max-content;">
+                <p>LINKS</p>
+                <div style="width: min-content; margin: auto; display: flex;">
+                    <a href="https://discord.gg/JtBMPEb54H" target="_blank"><img src="img/link_D.png"></a>
+                    <a href="https://github.com/WaspVentMan/shotinthedark" target="_blank"><img src="img/link_G.png"></a>
+                </div>
+            </div>
+
+            <p style="position: absolute; bottom: 0px; right: 0px; text-align: right; height: 20px;" onclick="singlechange()">Single Gun Mode</p>
+            <div class="gundispstartcontain" style="position: absolute; bottom: 20px; right: 0px; width: 256px; height: 0px; mix-blend-mode: difference; display: none;">
+                <img class="gundispstart" src="img/buckshot.png" style="position: absolute; bottom: 0px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference; pointer-events: none;">
+                <p class="gundispname" style="position: absolute; bottom: 118px; right: -118px; width: 256px; rotate: 90deg; text-align: right; height: 20px;">Shotgun</p>
             </div>
         </div>
-        <p class="subtitle" style="position: absolute; text-align: center; bottom: 0%; left: 0%; width: 100%; height: max-content;"></p>
-    </div>
-    <div class="leaderboard" style="width: 512px; height: 512px; z-index: 102; position: absolute; display: none; background-color: black; text-align: center;">
-        <h1 class="lbTitle">Femtanyl - KATAMARI</h1>
-        <p class="lbmode"></p>
-        <br>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; width: 512px;">
-            <div>
-                <h1>RESULTS</h1>
-                <br>
-                <h1>SCORE</h1>
-                <p class="endScore"></p>
-                <br>
-                <h1>COMBO</h1>
-                <p class="endCombo"></p>
-                <br>
-                <h1>ACCURACY</h1>
-                <p class="endAcc"></p>
-                <br>
-                <h1>GRADE</h1>
-                <h1 class="endRank"></h1>
-            </div>
-            <div>
-                <h1>LEADERBOARD</h1>
-                <div style="width: 256px; height: 128px;">
-                    <p>Score</p>
-                    <div class="scoreleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
-                </div>
-                <div style="width: 256px; height: 128px;">
-                    <p>Combo</p>
-                    <div class="comboleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
-                </div>
-                <div style="width: 256px; height: 128px;">
-                    <p>Accuracy</p>
-                    <div class="accleader" style="display: grid; grid-template-columns: 1fr 3fr 2fr; width: 256px;"></div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div style="position: absolute; bottom: 0%; left: 0%; width: 512px; height: 20px; text-align: center;" onclick="document.querySelector('.startScreen').style.display = 'block'; document.querySelector('.leaderboard').style.display = 'none'; songchange(0)">Main Menu</div>
-    </div>
-    <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;">
-        <br>
-        <p class="songnamedisp" style="height: min-content;">KATAMARI</p>
-        <p class="songartistdisp" style="margin-bottom: 4px;">Femtanyl</p>
-        <img class="songAAdisp" src="img/Femtanyl - KATAMARI.png" width="256" height="256"><br>
-        <div class="songLinks"></div>
-        <div style="display: grid; grid-template-columns: 256px 256px; margin: auto; width: max-content;">
-            <div class="songSel" style="width: 512px;">
-                <br>
-                <p><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p><br>
-                
-                <div onclick="preview = false; init()">START</div>
-                <div onclick="preview = true; init()">PREVIEW</div>
-            </div>
-            <div class="weaponSel" style="display: none;">
-                <br>
-                <p><b onclick="gunchange(-1)" style="margin: 8px;"><<<</b><b>GUN</b><b onclick="gunchange(1)" style="margin: 8px;">>>></b></p>
-                <div style="display: grid; grid-template-columns: 8fr min-content 8fr; column-gap: 8px;">
-                    <p style="text-align: right;">Ammo</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoMag">32</p>
-                    <p style="text-align: right;">Mode</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoMode">25/s</p>
-                    <p style="text-align: right;">Rate</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoRate">25/s</p>
-                    <p style="text-align: right;">Rld</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoReload">0s</p>
-                    <p style="text-align: right;">Sprd</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoAcc">0-1</p>
-                    <p style="text-align: right;">Sp/s</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoAccDec">0/shot</p>
-                    <p style="text-align: right;">Pts X</p>
-                    <p>|</p>
-                    <p style="text-align: left;" class="gunInfoScore">0.25x</p>
-                </div>
-            </div>
-        </div>
-        <p style="position: absolute; bottom: 0px; left: 0px;" onclick="document.querySelector('.settingsScreen').style.display = 'block'">SETTINGS</p>
-        <div style="position: absolute; width: 64px; bottom: 0%; right: calc(50% - 32px); height: max-content;">
-            <p>LINKS</p>
-            <div style="width: min-content; margin: auto; display: flex;">
-                <a href="https://discord.gg/JtBMPEb54H" target="_blank"><img src="img/link_D.png"></a>
-                <a href="https://github.com/WaspVentMan/shotinthedark" target="_blank"><img src="img/link_G.png"></a>
-            </div>
+        <div class="settingsScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; display: none; overflow-y: scroll;">
+            <h1>(WIP) SETTINGS</h1>
+            <p onclick="document.querySelector('.settingsScreen').style.display = 'none'">BACK</p>
+            <br>
+            <p onclick="allSongs(); this.remove()">ADD WIP SONGS TO MENU</p>
+            <p>Music: <b class="musVol">50</b>% <b onclick="volchange(0, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/KATAMARI_test.mp3`); gunshot.volume = volume[0]/100; gunshot.play();">test</b> <b onclick="volchange(0, 5)">>>></b></p>
+            <p>Sound: <b class="sndVol">50</b>% <b onclick="volchange(1, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/shot${Math.round(Math.random())+2}.mp3`); gunshot.volume = volume[1]/100; gunshot.play();">test</b> <b onclick="volchange(1, 5)">>>></b></p>
+            <br>
+            <p>Preffered pistol</p>
+            <p onclick="
+            if (guns.classic.auto){
+                guns.classic.auto = false
+                guns.classic.rate = 0
+                this.textContent = 'Manual'
+            } else {
+                guns.classic.auto = true
+                guns.classic.rate = 160
+                this.textContent = 'Automatic'
+            }
+            ">Manual</p>
+            <br>
+            <p>Baby Mode (censors the FUCK word and others)</p>
+            <p onclick="
+            if (songs.tutorial.name == 'Tutorial'){
+                songs.tutorial = songsXTRA.baby_tutorial
+                this.textContent = 'ON'
+            } else {
+                songs.tutorial = songsXTRA.tutorial
+                this.textContent = 'OFF'
+            }
+            songchange(0)
+            ">OFF</p>
+            <br>
+            <p>IMPORT CUSTOM SONGS</p>
+            <p>Enter the link to the song you want to import</p>
+            <p>i.e.: "https://waspventman.co.uk/temp/test.json"</p>
+            <input type="text" style="color: black; width: 90%;" class="customImport">
+            <div onclick="importSongs(document.querySelector('.customImport').value)">IMPORT SONGS!</div>
+            <p>Song assets may take some time loading in depending on your internet speed, please be patient :)</p>
+            <br><br>
+            <a href="./editor/" target="_blank">LEVEL EDITOR</a>
         </div>
 
-        <p style="position: absolute; bottom: 0px; right: 0px; text-align: right; height: 20px;">Single Gun Mode <input type="checkbox" onclick="singlechange()" class="singleMode"></p>
-        <div class="gundispstartcontain" style="position: absolute; bottom: 20px; right: 0px; width: 256px; height: 0px; mix-blend-mode: difference; display: none;">
-            <img class="gundispstart" src="img/buckshot.png" style="position: absolute; bottom: 0px; right: 20px; width: 64px; height: 256px; mix-blend-mode: difference; pointer-events: none;">
-            <p class="gundispname" style="position: absolute; bottom: 118px; right: -118px; width: 256px; rotate: 90deg; text-align: right; height: 20px;">Shotgun</p>
-        </div>
-    </div>
-    <div class="settingsScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; display: none; overflow-y: scroll;">
-        <h1>(WIP) SETTINGS</h1>
-        <p onclick="document.querySelector('.settingsScreen').style.display = 'none'">BACK</p>
-        <br>
-        <p onclick="allSongs(); this.remove()">ADD WIP SONGS TO MENU</p>
-        <p>Music: <b class="musVol">50</b>% <b onclick="volchange(0, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/KATAMARI_test.mp3`); gunshot.volume = volume[0]/100; gunshot.play();">test</b> <b onclick="volchange(0, 5)">>>></b></p>
-        <p>Sound: <b class="sndVol">50</b>% <b onclick="volchange(1, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/shot${Math.round(Math.random())+2}.mp3`); gunshot.volume = volume[1]/100; gunshot.play();">test</b> <b onclick="volchange(1, 5)">>>></b></p>
-        <br>
-        <p>Preffered pistol</p>
-        <p onclick="
-        if (guns.classic.auto){
-            guns.classic.auto = false
-            guns.classic.rate = 0
-            this.textContent = 'Manual'
-        } else {
-            guns.classic.auto = true
-            guns.classic.rate = 160
-            this.textContent = 'Automatic'
-        }
-        ">Manual</p>
-        <br>
-        <p>Baby Mode (censors the FUCK word and others)</p>
-        <p onclick="
-        if (songs.tutorial.name == 'Tutorial'){
-            songs.tutorial = songsXTRA.baby_tutorial
-            this.textContent = 'ON'
-        } else {
-            songs.tutorial = songsXTRA.tutorial
-            this.textContent = 'OFF'
-        }
-        songchange(0)
-        ">OFF</p>
-        <br>
-        <p>IMPORT CUSTOM SONGS</p>
-        <p>Enter the link to the song you want to import</p>
-        <p>i.e.: "https://waspventman.co.uk/temp/test.json"</p>
-        <input type="text" style="color: black; width: 90%;" class="customImport">
-        <div onclick="importSongs(document.querySelector('.customImport').value)">IMPORT SONGS!</div>
-        <p>Song assets may take some time loading in depending on your internet speed, please be patient :)</p>
-        <br><br>
-        <a href="./editor/" target="_blank">LEVEL EDITOR</a>
-    </div>
-
-    <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.'){songchange(0); this.style.display = 'none'}">
-        <br>
-        <h1 style="mix-blend-mode: difference;">SHOTS IN THE DARK</h1>
-        <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>
-        <div class="loadZone" style="display: none;">
-            <img src="img/ebe.png">
-            <audio preload="auto" src="audio/music/amalgam.mp3"></audio>
-            <audio preload="auto" src="audio/music/KATAMARI.mp3"></audio>
-            <audio preload="auto" src="audio/KATAMARI_prev.mp3"></audio>
-            <audio preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
-            <audio preload="auto" src="audio/music/tutorial.mp3"></audio>
-            <audio preload="auto" src="audio/music/tutorial_censor.mp3"></audio>
-            <audio preload="auto" src="audio/Boot Sequence.mp3"></audio>
-            <audio preload="auto" src="audio/HC_reload.mp3"></audio>
-            <audio preload="auto" src="audio/HC_shoot.mp3"></audio>
-            <audio preload="auto" src="audio/reload.mp3"></audio>
-            <audio preload="auto" src="audio/reloadshort.mp3"></audio>
-            <audio preload="auto" src="audio/shot2.mp3"></audio>
-            <audio preload="auto" src="audio/shot3.mp3"></audio>
-            <img src="img/buckshot.png">
-            <img src="img/bullet.png">
-            <img src="img/case.png">
-            <img src="img/cover_UT.png">
-            <img src="img/classic.png">
-            <img src="img/crossBC.png">
-            <img src="img/crossBL.png">
-            <img src="img/crossBR.png">
-            <img src="img/crossCL.png">
-            <img src="img/crossCR.png">
-            <img src="img/crossTC.png">
-            <img src="img/crossTL.png">
-            <img src="img/crossTR.png">
-            <img src="img/ante iudicium doceo.png">
-            <img src="img/Femtanyl - KATAMARI.png">
-            <img src="img/heavy.png">
-            <img src="img/heavycase.png">
-            <img src="img/hitmarker.png">
-            <img src="img/miss.png">
-            <img src="img/pico.png">
-            <img src="img/rankA.png">
-            <img src="img/rankB.png">
-            <img src="img/rankC.png">
-            <img src="img/rankD.png">
-            <img src="img/rankF.png">
-            <img src="img/rankS.png">
-            <img src="img/slug.png">
-            <img src="img/target.png">
-            <img src="img/targetghost.png">
+        <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.'){songchange(0); this.style.display = 'none'}">
+            <br>
+            <h1 style="mix-blend-mode: difference;">SHOTS IN THE DARK</h1>
+            <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>
+            <div class="loadZone" style="display: none;">
+                <img src="img/ebe.png">
+                <audio preload="auto" src="audio/music/amalgam.mp3"></audio>
+                <audio preload="auto" src="audio/music/KATAMARI.mp3"></audio>
+                <audio preload="auto" src="audio/KATAMARI_prev.mp3"></audio>
+                <audio preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
+                <audio preload="auto" src="audio/music/tutorial.mp3"></audio>
+                <audio preload="auto" src="audio/music/tutorial_censor.mp3"></audio>
+                <audio preload="auto" src="audio/Boot Sequence.mp3"></audio>
+                <audio preload="auto" src="audio/HC_reload.mp3"></audio>
+                <audio preload="auto" src="audio/HC_shoot.mp3"></audio>
+                <audio preload="auto" src="audio/reload.mp3"></audio>
+                <audio preload="auto" src="audio/reloadshort.mp3"></audio>
+                <audio preload="auto" src="audio/shot2.mp3"></audio>
+                <audio preload="auto" src="audio/shot3.mp3"></audio>
+                <img src="img/buckshot.png">
+                <img src="img/bullet.png">
+                <img src="img/case.png">
+                <img src="img/cover_UT.png">
+                <img src="img/classic.png">
+                <img src="img/crossBC.png">
+                <img src="img/crossBL.png">
+                <img src="img/crossBR.png">
+                <img src="img/crossCL.png">
+                <img src="img/crossCR.png">
+                <img src="img/crossTC.png">
+                <img src="img/crossTL.png">
+                <img src="img/crossTR.png">
+                <img src="img/ante iudicium doceo.png">
+                <img src="img/Femtanyl - KATAMARI.png">
+                <img src="img/heavy.png">
+                <img src="img/heavycase.png">
+                <img src="img/hitmarker.png">
+                <img src="img/miss.png">
+                <img src="img/pico.png">
+                <img src="img/rankA.png">
+                <img src="img/rankB.png">
+                <img src="img/rankC.png">
+                <img src="img/rankD.png">
+                <img src="img/rankF.png">
+                <img src="img/rankS.png">
+                <img src="img/slug.png">
+                <img src="img/target.png">
+                <img src="img/targetghost.png">
+            </div>
         </div>
     </div>
 
@@ -234,7 +240,7 @@
         <div style="position: absolute; bottom: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-image: url('img/crossBC.png');"></div>
         <div style="position: absolute; bottom: 0%; right: 0%; width: 7px; height: 7px; background-image: url('img/crossBR.png');"></div>
     </div>
-
+    
     <script src="nginit.js"></script>
 
     <script src="guns.js"></script>

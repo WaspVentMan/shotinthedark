@@ -3,7 +3,7 @@ const target = document.querySelector(".target")
 const songSelect = document.querySelector(".songSelect")
 
 let volume = [50, 20]
-let single = false
+let single = true
 let preview = false
 let load = false
 
@@ -102,6 +102,13 @@ function songchange(value){
     musicPlayer.play()
 
     document.querySelector(".songAAdisp").src = songs[Object.keys(songs)[select[0]]].cover
+
+    if (select[0]-1 < 0){document.querySelector(".prevAAdisp").src = songs[Object.keys(songs)[Object.keys(songs).length-1]].cover}
+    else {document.querySelector(".prevAAdisp").src = songs[Object.keys(songs)[select[0]-1]].cover}
+
+    if (select[0]+1 > Object.keys(songs).length-1){document.querySelector(".nextAAdisp").src = songs[Object.keys(songs)[0]].cover}
+    else {document.querySelector(".nextAAdisp").src = songs[Object.keys(songs)[select[0]+1]].cover}
+
     document.querySelector(".songnamedisp").textContent = songs[Object.keys(songs)[select[0]]].name
     document.querySelector(".songartistdisp").textContent = songs[Object.keys(songs)[select[0]]].artist
 
@@ -152,7 +159,7 @@ function gunchange(value){
 }
 
 function singlechange(){
-    single = document.querySelector(".singleMode").checked
+    single = !single
     if (single){
         document.querySelector(".songSel").style.width = "256px"
         document.querySelector(".weaponSel").style.display = "block"
@@ -371,6 +378,7 @@ function gameloop(){
     }
 
     if (key["m"] && player.gun.name == "Pistol"){
+        key["m"] = false
         if (player.gun.auto){
             player.gun.auto = false
             player.gun.rate = 0

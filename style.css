@@ -3,6 +3,15 @@
     src: url("font/Perfect DOS VGA 437.ttf");
 }
 
+@keyframes bgscroll {
+    from {background-position: 0% 0%;}
+    to {background-position: 64px 32px;}
+}
+
+body {
+    animation: bgscroll 10s linear infinite;
+}
+
 body:hover{
     cursor: none;
 }
@@ -39,6 +48,10 @@ p {
     transition: rotate 0.5s;
 
     z-index: 998;
+}
+
+.crosshair:hover{
+    cursor: none;
 }
 
 .hitmarker {
