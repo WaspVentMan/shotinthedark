@@ -11,9 +11,9 @@
 </head>
 <body style="margin: 0; background-image: url('img/bg.png'); height: 100vh; overflow: hidden;" oncontextmenu="return false" onload="load = true">
     <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; top: calc(50% - 256px); left: calc(50% - 256px);">
-        <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-color: white; background-image: url('img/rgb.png');">
+        <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; text-align: left; background-image: url('img/rgb.png');">
             <img class="light" draggable="false" src="img/target.png" style="width: 512px; height: 512px; position: absolute; mix-blend-mode: darken;">
-            <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute;">
+            <img class="target" draggable="false" src="img/target.png" style="width: 128px; height: 128px; border-radius: 100%; position: absolute; outline: 2px solid black;">
         </div>
         <div class="darkness" style="width: 512px; height: 512px; background-color: black; z-index: 100; position: absolute; pointer-events: none; overflow: hidden;">
             <div class="bullets"></div>
@@ -177,7 +177,7 @@
             <a href="./editor/" target="_blank">LEVEL EDITOR</a>
         </div>
 
-        <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.'){songchange(0); this.style.display = 'none'}">
+        <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && (document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.' || offline)){songchange(0); this.style.display = 'none'}">
             <br>
             <h1 style="mix-blend-mode: difference;">SHOTS IN THE DARK</h1>
             <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>

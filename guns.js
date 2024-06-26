@@ -60,7 +60,7 @@ const guns = {
         "name": "Pico's MAC-10",
         "spread": [29, 200],
         "spreadRate": 7.5,
-        "scoreMult": 0.25,
+        "scoreMult": 0.5,
         "reloadS": "audio/reload.mp3",
         "bullet": "img/bullet.png",
         "case": "img/case.png",
@@ -115,5 +115,35 @@ const guns = {
         "shootS": "audio/snd_rudebuster_swing.wav",
         "reloadS": null,
         "img": "img/rudeBust.png"
+    },
+    "lmg": {
+        "ammo": [100, 100],
+        "auto": true,
+        "rate": 80,
+        "reload": 5000,
+        "autoReload": false,
+        "name": "LMG",
+        "spread": [29, 200],
+        "spreadRate": 12.5,
+        "scoreMult": 0.75,
+        "reloadS": "audio/reload.mp3",
+        "bullet": "img/heavy.png",
+        "case": "img/heavycase.png",
+        "img": "img/pico.png"
+    },
+    "minigun": {
+        "ammo": [250, 250],
+        "auto": true,
+        "rate": 40,
+        "reload": 10000,
+        "autoReload": false,
+        "name": "Minigun",
+        "spread": [29, 999],
+        "spreadRate": 5,
+        "scoreMult": 0.75,
+        "reloadS": "audio/reload.mp3",
+        "bullet": "img/bullet.png",
+        "case": "img/case.png",
+        "img": "img/pico.png"
     }
 }

@@ -1,3 +1,5 @@
+let offline = false
+
 // Set up the options for NGIO.
 var options = {
     version: "1.0",
@@ -14,7 +16,14 @@ let ngLoop = setInterval(function(){
 
         // This is a generic check to see if we're waiting for something...
         if (NGIO.isWaitingStatus) {
-            document.querySelector(".NewgroundsIO").innerHTML = "NG Connecting..."
+            let genericWait = "WAITING FOR<br><img src=\"img/newgroundstitle.png\" style=\"width: 256px\">"
+            document.querySelector(".NewgroundsIO").innerHTML = genericWait
+
+            setTimeout(function(){
+                if (document.querySelector(".NewgroundsIO").innerHTML == genericWait){
+                    document.querySelector(".NewgroundsIO").innerHTML += "<br><p>IF THIS PERSISTS, NG MIGHT BE DOWN</p><p onclick=\"offline = true\">CLICK FOR OFFLINE MODE</p>"
+                }
+            }, 5000)
             // We're either waiting for the server to respond, or the user to sign in on Newgrounds.
             // Show a "please wait" message and/or a spinner so the player knows something is happening
         }
@@ -39,7 +48,7 @@ let ngLoop = setInterval(function(){
 
             // user needs to log in
             case NGIO.STATUS_LOGIN_REQUIRED:
-                document.querySelector(".NewgroundsIO").innerHTML = "<p>Please log into Newgrounds</p><p onclick=\"NGIO.openLoginPage()\">Click here to log</p>"
+                document.querySelector(".NewgroundsIO").innerHTML = "<p onclick=\"NGIO.openLoginPage()\">PLEASE LOG INTO<br><img src='img/newgroundstitle.png' style='width: 256px'></p>"
 
                 // Show a "Log In" button that calls NGIO.openLoginPage();
                 // Show a "No Thanks" button that calls NGIO.skipLogin();
@@ -48,7 +57,7 @@ let ngLoop = setInterval(function(){
 
             // We are waiting for the user to log in (they should have a login page in a new browser tab)
             case NGIO.STATUS_WAITING_FOR_USER:
-                document.querySelector(".NewgroundsIO").innerHTML = "NG Connecting"
+                document.querySelector(".NewgroundsIO").innerHTML = "CONNECTING TO<br><img src='img/newgroundstitle.png'>"
 
                 // Show a "Cancel Login" button that calls NGIO.cancelLogin();
                 

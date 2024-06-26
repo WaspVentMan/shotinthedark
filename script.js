@@ -84,8 +84,10 @@ function init(){
 
     musicPlayer.play()
 
-    if (!NGIO.getMedal(79344).unlocked){
-        NGIO.unlockMedal(79344, onMedalUnlocked)
+    if (!offline){
+        if (!NGIO.getMedal(79344).unlocked){
+            NGIO.unlockMedal(79344, onMedalUnlocked)
+        }
     }
 }
 
@@ -369,11 +371,6 @@ function gameloop(){
 
                 player.gun.ammo[1] = player.gun.ammo[0]
             }, player.gun.reload)
-        } else {
-            player.gun = guns[["basic","pico","fortnite","buckshot"][Math.round(Math.random()*3)]]
-            player.reload = false
-    
-            gunInit()
         }
     }
 
@@ -493,20 +490,12 @@ function gameloop(){
                     htmlBullet.style.backgroundImage = "url('" + player.gun.case + "')"
                 }
             } else {
-                player.bullets[x].x = 30 + (40*Math.floor(x/24))
-                player.bullets[x].y = 20+ 2 + (17*(x-(Math.floor(x/24)*24)))
+                player.bullets[x].x = 15 + ((40*Math.floor(x/24)) - ((player.gun.ammo[1]/24)*40))
+                player.bullets[x].y = 22 + (17*(x-(Math.floor(x/24)*24)))
                 player.bullets[x].r = 0
 
                 if (player.gun.ammo[1] == x+1){
-                    player.bullets[x].x -= 5
-                } else if (player.gun.ammo[1] == x+2){
-                    player.bullets[x].x -= 20
-                } else if (player.gun.ammo[1] == x+3){
-                    player.bullets[x].x -= 25
-                } else if (player.gun.ammo[1] == x+4){
-                    player.bullets[x].x -= 27.5
-                } else {
-                    player.bullets[x].x -= 30
+                    player.bullets[x].x += 5
                 }
                 
                 player.bullets[x].xv = Math.random()*5+10
