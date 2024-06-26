@@ -138,7 +138,7 @@
             <h1>(WIP) SETTINGS</h1>
             <p onclick="document.querySelector('.settingsScreen').style.display = 'none'">BACK</p>
             <br>
-            <p onclick="allSongs(); this.remove()">ADD WIP SONGS TO MENU</p>
+            <p onclick="allSongs(); songchange(0); this.remove()">ADD WIP SONGS TO MENU</p>
             <p>Music: <b class="musVol">50</b>% <b onclick="volchange(0, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/KATAMARI_test.mp3`); gunshot.volume = volume[0]/100; gunshot.play();">test</b> <b onclick="volchange(0, 5)">>>></b></p>
             <p>Sound: <b class="sndVol">50</b>% <b onclick="volchange(1, -5)"><<<</b> <b onclick="let gunshot = new Audio(`audio/shot${Math.round(Math.random())+2}.mp3`); gunshot.volume = volume[1]/100; gunshot.play();">test</b> <b onclick="volchange(1, 5)">>>></b></p>
             <br>
@@ -169,9 +169,11 @@
             <br>
             <p>IMPORT CUSTOM SONGS</p>
             <p>Enter the link to the song you want to import</p>
-            <p>i.e.: "https://waspventman.co.uk/temp/test.json"</p>
+            <p>i.e.: "https://waspventman.co.uk/SITD/clang.json"</p>
             <input type="text" style="color: black; width: 90%;" class="customImport">
-            <div onclick="importSongs(document.querySelector('.customImport').value)">IMPORT SONGS!</div>
+            <div onclick="importSongs(document.querySelector('.customImport').value); songchange(0)">IMPORT SONGS!</div>
+            <p class="importInfo"></p>
+            <br>
             <p>Song assets may take some time loading in depending on your internet speed, please be patient :)</p>
             <br><br>
             <a href="./editor/" target="_blank">LEVEL EDITOR</a>

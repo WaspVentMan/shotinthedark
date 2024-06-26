@@ -16,11 +16,19 @@ function allSongs(){
 }
 
 async function importSongs(url){
-    let newSongs = await (await fetch(url)).json()
+    try {
+        let newSongs = await (await fetch(url)).json()
 
-    songs = Object.assign({}, newSongs, songs)
+        songs = Object.assign({}, newSongs, songs)
 
-    console.log(`Successfully imported ${Object.keys(newSongs).length} new song(s)`)
+        document.querySelector(".importInfo").textContent = `Successfully imported ${Object.keys(newSongs).length} new song(s)`
+    } catch {
+        document.querySelector(".importInfo").textContent = `Error importing song`
+    }
+
+    setTimeout(function(){
+        document.querySelector(".importInfo").textContent = ""
+    }, 5000)
 }
 
 let gun = Object.keys(guns)[select[1]]
@@ -700,6 +708,26 @@ function gameloop(){
             document.querySelector(".endCombo").textContent = "x" + numeral(player.bestcombo).format("0,0")
             document.querySelector(".endAcc").textContent = numeral(player.acc).format("0.00%")
 
+            if (player.acc >= 0.95){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankS.png\">"
+            } else if (player.acc >= 0.9){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankA.png\">"
+            } else if (player.acc >= 0.8){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankB.png\">"
+            } else if (player.acc >= 0.6){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankC.png\">"
+            } else if (player.acc >= 0.3){
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankD.png\">"
+            } else {
+                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankF.png\">"
+
+                musicPlayer.volume = 0.01
+
+                let voicePlayer = new Audio("audio/rank_F_talk.mp3")
+                voicePlayer.volume = volume[1]/100
+                voicePlayer.play()
+            }
+
             document.querySelector(".scoreleader").innerHTML = ""
             for (let rank = 0; rank < 5; rank++){
                 if (rank < boards.score.length){
@@ -737,26 +765,6 @@ function gameloop(){
                 } else {
                     document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
                 }
-            }
-
-            if (player.acc >= 0.95){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankS.png\">"
-            } else if (player.acc >= 0.9){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankA.png\">"
-            } else if (player.acc >= 0.8){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankB.png\">"
-            } else if (player.acc >= 0.6){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankC.png\">"
-            } else if (player.acc >= 0.3){
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankD.png\">"
-            } else {
-                document.querySelector(".endRank").innerHTML = "<img src=\"img/rankF.png\">"
-
-                musicPlayer.volume = 0.01
-
-                let voicePlayer = new Audio("audio/rank_F_talk.mp3")
-                voicePlayer.volume = volume[1]/100
-                voicePlayer.play()
             }
         }, 2650)
 
