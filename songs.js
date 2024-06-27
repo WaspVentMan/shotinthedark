@@ -6,7 +6,10 @@ const songsDONE = {
         "name": "Tutorial",
         "cover": "img/ante iudicium doceo.png",
         "background": "img/ante iudicium doceo.png",
+        "achievement": 79651,
         "link": [
+            {"url": "https://discord.gg/JtBMPEb54H", "type": "D"},
+            {"url": "https://github.com/WaspVentMan/shotinthedark", "type": "G"},
             {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
         ],
         "leaderboards": [
@@ -74,6 +77,7 @@ const songsDONE = {
         "name": "Amalgam",
         "cover": "img/cover_UT.png",
         "background": "img/truelab.png",
+        "achievement": 79653,
         "link": [
             {"url": "https://undertale.com/", "type": "UT"},
             {"url": "https://tobyfox.bandcamp.com/album/undertale-soundtrack", "type": "BC"}
@@ -364,6 +368,7 @@ const songsWIP = {
         "name": "KATAMARI",
         "cover": "img/Femtanyl - KATAMARI.png",
         "background": "img/Femtanyl - KATAMARI.png",
+        "achievement": 79652,
         "link": [
             {
                 "url": "https://www.newgrounds.com/audio/listen/1264675",
@@ -2812,6 +2817,7 @@ const songsXTRA = {
         "name": "Tutorial",
         "cover": "img/ante iudicium doceo.png",
         "background": "img/ante iudicium doceo.png",
+        "achievement": 79651,
         "link": [
             {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
         ],
@@ -2881,6 +2887,7 @@ const songsXTRA = {
         "name": "Tutorial (Censored)",
         "cover": "img/ante iudicium doceo.png",
         "background": "img/ante iudicium doceo.png",
+        "achievement": 79651,
         "link": [
             {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
         ],

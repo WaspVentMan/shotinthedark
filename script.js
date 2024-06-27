@@ -22,6 +22,8 @@ async function importSongs(url){
         songs = Object.assign({}, newSongs, songs)
 
         document.querySelector(".importInfo").textContent = `Successfully imported ${Object.keys(newSongs).length} new song(s)`
+
+        unlockMedal(79650)
     } catch {
         document.querySelector(".importInfo").textContent = `Error importing song`
     }
@@ -48,8 +50,10 @@ function gunInit(){
     if (player.gun.img){
         document.querySelector(".gundisp").src = player.gun.img
         document.querySelector(".gundisp").style.display = "block"
+        document.querySelector(".ammoDisp").textContent = player.gun.ammo[0]
     } else {
         document.querySelector(".gundisp").style.display = "none"
+        document.querySelector(".ammoDisp").textContent = ""
     }
 
     document.querySelector(".gunName").innerHTML = player.gun.name
@@ -92,11 +96,7 @@ function init(){
 
     musicPlayer.play()
 
-    if (!offline){
-        if (!NGIO.getMedal(79344).unlocked){
-            NGIO.unlockMedal(79344, onMedalUnlocked)
-        }
-    }
+    unlockMedal(79344)
 }
 
 function songchange(value){
@@ -250,6 +250,7 @@ function gameloop(){
             }, player.gun.rate)
         }
         player.gun.ammo[1] --
+        document.querySelector(".ammoDisp").textContent = player.gun.ammo[1]
 
         let targetBounds = document.querySelector(".target").getBoundingClientRect()
 
@@ -378,6 +379,7 @@ function gameloop(){
                 player.reload = false
 
                 player.gun.ammo[1] = player.gun.ammo[0]
+                document.querySelector(".ammoDisp").textContent = player.gun.ammo[1]
             }, player.gun.reload)
         }
     }
@@ -560,81 +562,29 @@ function gameloop(){
         document.querySelector(".leaderboard").style.display = "block"
 
         // medals
-        if (player.gun.name != "Pico's Debug MAC-10" && player.shots.length > 10){
-            if (!NGIO.getMedal(79212).unlocked && player.acc == 0){
-                NGIO.unlockMedal(79212, onMedalUnlocked)
-            }
+        if (player.shots.length > 10){
+            unlockMedal(79212, player.acc == 0)
+            unlockMedal(79201, player.acc >= 0.3)
+            unlockMedal(79200, player.acc >= 0.6)
+            unlockMedal(79199, player.acc >= 0.8)
+            unlockMedal(79198, player.acc >= 0.9)
+            unlockMedal(79197, player.acc >= 0.95)
+            unlockMedal(79213, player.points == 0)
+            unlockMedal(79202, player.points >= 7e4)
+            unlockMedal(79203, player.points >= 5e5)
+            unlockMedal(79209, player.points >= 1e6)
+            unlockMedal(79210, player.points >= 2e6)
+            unlockMedal(79211, player.points >= 5e6)
+            unlockMedal(79214, player.bestcombo == 0)
+            unlockMedal(79204, player.bestcombo >= 10)
+            unlockMedal(79205, player.bestcombo >= 50)
+            unlockMedal(79206, player.bestcombo >= 100)
+            unlockMedal(79207, player.bestcombo >= 200)
+            unlockMedal(79208, player.bestcombo >= 500)
+            unlockMedal(79343, single)
 
-            if (!NGIO.getMedal(79201).unlocked && player.acc >= 0.3){
-                NGIO.unlockMedal(79201, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79200).unlocked && player.acc >= 0.6){
-                NGIO.unlockMedal(79200, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79199).unlocked && player.acc >= 0.8){
-                NGIO.unlockMedal(79199, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79198).unlocked && player.acc >= 0.9){
-                NGIO.unlockMedal(79198, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79197).unlocked && player.acc >= 0.95){
-                NGIO.unlockMedal(79197, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79213).unlocked && player.points == 0){
-                NGIO.unlockMedal(79213, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79202).unlocked && player.points >= 7e4){
-                NGIO.unlockMedal(79202, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79203).unlocked && player.points >= 5e5){
-                NGIO.unlockMedal(79203, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79209).unlocked && player.points >= 1e6){
-                NGIO.unlockMedal(79209, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79210).unlocked && player.points >= 2e6){
-                NGIO.unlockMedal(79210, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79211).unlocked && player.points >= 5e6){
-                NGIO.unlockMedal(79211, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79214).unlocked && player.bestcombo == 0){
-                NGIO.unlockMedal(79214, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79204).unlocked && player.bestcombo >= 10){
-                NGIO.unlockMedal(79204, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79205).unlocked && player.bestcombo >= 50){
-                NGIO.unlockMedal(79205, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79206).unlocked && player.bestcombo >= 100){
-                NGIO.unlockMedal(79206, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79207).unlocked && player.bestcombo >= 200){
-                NGIO.unlockMedal(79207, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79208).unlocked && player.bestcombo >= 500){
-                NGIO.unlockMedal(79208, onMedalUnlocked)
-            }
-
-            if (!NGIO.getMedal(79343).unlocked && single){
-                NGIO.unlockMedal(79343, onMedalUnlocked)
+            if (songs[Object.keys(songs)[select[0]]].achievement != undefined){
+                unlockMedal(songs[Object.keys(songs)[select[0]]].achievement)
             }
         }
 

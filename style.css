@@ -8,8 +8,13 @@
     to {background-position: 64px 32px;}
 }
 
+@keyframes bgscroll2 {
+    from {background-position: 0% 0%;}
+    to {background-position: -32px -64px;}
+}
+
 body {
-    animation: bgscroll 10s linear infinite;
+    animation: bgscroll 50s linear infinite;
 }
 
 body:hover{

@@ -76,9 +76,18 @@ let ngLoop = setInterval(function(){
     })
 }, 100)
 
+function unlockMedal(medal, condition = true){
+    if (!offline){
+        if (!NGIO.getMedal(medal).unlocked && condition){
+            NGIO.unlockMedal(medal, onMedalUnlocked)
+        }
+    }
+}
+
 function onMedalUnlocked(medal)
 {
-    //document.querySelector(".achievement").innerHTML += `<div style="text-align: right; margin-right: 8px;"><p>${medal.name}</p><p>${medal.description}</p><p>+${medal.value} Points</p></div><img style="width: 50px;" src="https:${medal.icon}.png">`
+    console.log(`Granted medal: "${medal.name}"`)
+    document.querySelector(".achievement").innerHTML += `<div style="display: flex; background-color: black;" onclick="this.remove()"><div style="text-align: right; margin-right: 8px; margin-left: auto;"><p style="text-align: right; text-overflow: ellipsis; overflow: hidden;">${medal.name}</p><p style="text-align: right; text-overflow: ellipsis; overflow: hidden;">${medal.description}</p><p style="text-align: right; text-overflow: ellipsis; overflow: hidden;">+${medal.value} Points</p></div><img style="height: 50px" src="https:${medal.icon}.png"></div>`
     /**
      * Show a medal popup.  You can get medal information like so:
      *   medal.id
