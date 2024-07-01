@@ -201,6 +201,98 @@ function volchange(v, c){
     document.querySelector(".sndVol").textContent = volume[1]
 }
 
+function leaderboardUltra(submit){
+    let boards = {}
+
+    let tag = "Normal"
+    if (single){
+        tag = guns[Object.keys(guns)[select[1]]].name
+    }
+
+    let options = {
+        "period": NGIO.PERIOD_ALL_TIME,
+        "limit": 5,
+        "tag": tag
+    }
+
+    if (submit){
+        NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[0], player.points, tag, function(){
+            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[0], options, function(scores, board, options){
+                boards.score = scores
+            })
+        })
+        NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[1], player.bestcombo, tag, function(){
+            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[1], options, function(scores, board, options){
+                boards.combo = scores
+            })
+        })
+        NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[2], Math.floor((player.acc)*10000), tag, function(){
+            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[2], options, function(scores, board, options){
+                boards.acc = scores
+            })
+        })
+    } else {
+        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[0], options, function(scores, board, options){
+            boards.score = scores
+        })
+        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[1], options, function(scores, board, options){
+            boards.combo = scores
+        })
+        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[2], options, function(scores, board, options){
+            boards.acc = scores
+        })
+    }
+
+    document.querySelector(".scoreleader").innerHTML = ""
+    document.querySelector(".comboleader").innerHTML = ""
+    document.querySelector(".accleader").innerHTML = ""
+
+    if (!offline){ 
+        document.querySelector(".scoreleader").innerHTML = ""
+        for (let rank = 0; rank < 5; rank++){
+            if (rank < boards.score.length){
+                if (boards.score[rank].user.name == NGIO.user.name ){
+                    document.querySelector(".scoreleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(boards.score[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${boards.score[rank].user.name}</p>`
+                } else {
+                    document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p>${numeral(boards.score[rank].value).format("0,0")}</p><p>${boards.score[rank].user.name}</p>`
+                }
+            } else {
+                document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
+            }
+        }
+
+        document.querySelector(".comboleader").innerHTML = ""
+        for (let rank = 0; rank < 5; rank++){
+            if (rank < boards.combo.length){
+                if (boards.combo[rank].user.name == NGIO.user.name ){
+                    document.querySelector(".comboleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">x${numeral(boards.combo[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${boards.combo[rank].user.name}</p>`
+                } else {
+                    document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p>x${numeral(boards.combo[rank].value).format("0,0")}</p><p>${boards.combo[rank].user.name}</p>`
+                }
+            } else {
+                document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
+            }
+        }
+
+        document.querySelector(".accleader").innerHTML = ""
+        for (let rank = 0; rank < 5; rank++){
+            if (rank < boards.acc.length){
+                if (boards.acc[rank].user.name == NGIO.user.name ){
+                    document.querySelector(".accleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(boards.acc[rank].value/10000).format("0.00%")}</p><p style="background-color: white; color: black">${boards.acc[rank].user.name}</p>`
+                } else {
+                    document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p>${numeral(boards.acc[rank].value/10000).format("0.00%")}</p><p>${boards.acc[rank].user.name}</p>`
+                }
+            } else {
+                document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
+            }
+        }
+    } else {
+        document.querySelector(".scoreleader").innerHTML = "Log into Newgrounds to view leaderboards"
+        document.querySelector(".comboleader").innerHTML = "Log into Newgrounds to view leaderboards"
+        document.querySelector(".accleader").innerHTML = "Log into Newgrounds to view leaderboards"
+    }
+}
+
 gunchange(0)
 singlechange()
 volchange()
@@ -409,59 +501,7 @@ function gameloop(){
 
         document.querySelector(".leaderboard").style.display = "block"
 
-        let tag = "Normal"
-        if (single){
-            tag = guns[Object.keys(guns)[select[1]]].name
-        }
-            
-        let options = {
-            "period": NGIO.PERIOD_ALL_TIME,
-            "limit": 5,
-            "tag": tag
-        }
-
-        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[0], options, function(scores, board, options){
-            document.querySelector(".scoreleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < scores.length){
-                    if (scores[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".scoreleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(scores[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${scores[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p>${numeral(scores[rank].value).format("0,0")}</p><p>${scores[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
-            }
-        })
-        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[1], options, function(scores, board, options){
-            document.querySelector(".comboleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < scores.length){
-                    if (scores[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".comboleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">x${numeral(scores[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${scores[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p>x${numeral(scores[rank].value).format("0,0")}</p><p>${scores[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
-            }
-        })
-        NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[2], options, function(scores, board, options){
-            document.querySelector(".accleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < scores.length){
-                    if (scores[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".accleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(scores[rank].value/10000).format("0.0%")}</p><p style="background-color: white; color: black">${scores[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p>${numeral(scores[rank].value/10000).format("0.00%")}</p><p>${scores[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
-            }
-        })
+        leaderboardUltra(false)
 
         document.querySelector(".endScore").textContent = "Run Aborted"
         document.querySelector(".endCombo").textContent = "Run Aborted"
@@ -588,57 +628,7 @@ function gameloop(){
             }
         }
 
-        let boards = {}
-
-        if (player.gun.name == "Pico's Debug MAC-10" || player.shots.length < 10){
-            let tag = "Normal"
-            if (single){
-                tag = guns[Object.keys(guns)[select[1]]].name
-            }
-            
-            let options = {
-                "period": NGIO.PERIOD_ALL_TIME,
-                "limit": 5,
-                "tag": tag
-            }
-    
-            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[0], options, function(scores, board, options){
-                boards.score = scores
-            })
-            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[1], options, function(scores, board, options){
-                boards.combo = scores
-            })
-            NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[2], options, function(scores, board, options){
-                boards.acc = scores
-            })
-        } else {
-            let tag = "Normal"
-            if (single){
-                tag = guns[Object.keys(guns)[select[1]]].name
-            }
-            
-            let options = {
-                "period": NGIO.PERIOD_ALL_TIME,
-                "limit": 5,
-                "tag": tag
-            }
-    
-            NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[0], player.points, tag, function(){
-                NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[0], options, function(scores, board, options){
-                    boards.score = scores
-                })
-            })
-            NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[1], player.bestcombo, tag, function(){
-                NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[1], options, function(scores, board, options){
-                    boards.combo = scores
-                })
-            })
-            NGIO.postScore(songs[Object.keys(songs)[select[0]]].leaderboards[2], Math.floor((player.acc)*10000), tag, function(){
-                NGIO.getScores(songs[Object.keys(songs)[select[0]]].leaderboards[2], options, function(scores, board, options){
-                    boards.acc = scores
-                })
-            })
-        }
+        leaderboardUltra(player.shots.length < 10)
 
         musicPlayer = new Audio("audio/Boot Sequence.mp3")
         musicPlayer.loop = false
@@ -650,9 +640,6 @@ function gameloop(){
         document.querySelector(".endAcc").textContent = "?"
         document.querySelector(".endRank").innerHTML = "?"
 
-        document.querySelector(".scoreleader").innerHTML = ""
-        document.querySelector(".comboleader").innerHTML = ""
-        document.querySelector(".accleader").innerHTML = ""
         setTimeout(function(){
             document.querySelector(".endScore").textContent = numeral(player.points).format("0,0")
             document.querySelector(".endCombo").textContent = "x" + numeral(player.bestcombo).format("0,0")
@@ -676,45 +663,6 @@ function gameloop(){
                 let voicePlayer = new Audio("audio/rank_F_talk.mp3")
                 voicePlayer.volume = volume[1]/100
                 voicePlayer.play()
-            }
-
-            document.querySelector(".scoreleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < boards.score.length){
-                    if (boards.score[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".scoreleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(boards.score[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${boards.score[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p>${numeral(boards.score[rank].value).format("0,0")}</p><p>${boards.score[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".scoreleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
-            }
-
-            document.querySelector(".comboleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < boards.combo.length){
-                    if (boards.combo[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".comboleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">x${numeral(boards.combo[rank].value).format("0,0")}</p><p style="background-color: white; color: black">${boards.combo[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p>x${numeral(boards.combo[rank].value).format("0,0")}</p><p>${boards.combo[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".comboleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
-            }
-
-            document.querySelector(".accleader").innerHTML = ""
-            for (let rank = 0; rank < 5; rank++){
-                if (rank < boards.acc.length){
-                    if (boards.acc[rank].user.name == NGIO.user.name ){
-                        document.querySelector(".accleader").innerHTML += `<p style="background-color: white; color: black">${rank+1}</p><p style="background-color: white; color: black">${numeral(boards.acc[rank].value/10000).format("0.00%")}</p><p style="background-color: white; color: black">${boards.acc[rank].user.name}</p>`
-                    } else {
-                        document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p>${numeral(boards.acc[rank].value/10000).format("0.00%")}</p><p>${boards.acc[rank].user.name}</p>`
-                    }
-                } else {
-                    document.querySelector(".accleader").innerHTML += `<p>${rank+1}</p><p></p><p></p>`
-                }
             }
         }, 2650)
 
@@ -792,19 +740,11 @@ setInterval(function(){
         document.querySelector(".crosshair").style.height = player.spread + "px"
         document.querySelector(".crosshair").style.width = player.spread + "px"
         document.querySelector(".crosshair").style.top = (mousePos[1] -(player.spread/2)) + "px"
-        document.querySelector(".crosshair").style.left = (mousePos[0] -(player.spread/2)) + "px" 
-
-        if (document.querySelector(".crosshair").style.rotate != "0deg"){
-            document.querySelector(".crosshair").style.rotate = "0deg"
-        }
+        document.querySelector(".crosshair").style.left = (mousePos[0] -(player.spread/2)) + "px"
 
         if (player.gun.name == ""){
-            document.querySelector(".crosshair").style.height = "10px"
-            document.querySelector(".crosshair").style.width = "10px"
-
-            if (document.querySelector(".crosshair").style.rotate != "45deg"){
-                document.querySelector(".crosshair").style.rotate = "45deg"
-            }
+            document.querySelector(".crosshair").style.height = "11px"
+            document.querySelector(".crosshair").style.width = "11px"
         }
     } else {
         document.querySelector(".crosshair").style.height = guns[gun].spread[0] + "px"
