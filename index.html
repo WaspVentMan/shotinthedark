@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/gh/PsychoGoldfishNG/NewgroundsIO-JS@8c72515/dist/NewgroundsIO.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script>let loaded = 0</script>
 </head>
 <body style="margin: 0; background-image: url('img/bg.png'); height: 100vh; overflow: hidden; background-color: black;" oncontextmenu="return false" onload="load = true">
     <div style="width: 512px; height: 512px; overflow: hidden; position: absolute; top: calc(50% - 256px); left: calc(50% - 256px);">
@@ -36,8 +37,9 @@
             <p class="subtitle" style="position: absolute; text-align: center; bottom: 0%; left: 0%; width: 100%; height: max-content;"></p>
         </div>
         <div class="leaderboard" style="width: 512px; height: 512px; z-index: 102; position: absolute; display: none; background-color: black; text-align: center;">
-            <h1 class="lbTitle">Femtanyl - KATAMARI</h1>
+            <h1 class="lbTitle"></h1>
             <p class="lbmode"></p>
+            <p class="warning"></p>
             <br>
             <div style="display: grid; grid-template-columns: 1fr 1fr; width: 512px;">
                 <div>
@@ -75,22 +77,38 @@
             <div style="position: absolute; bottom: 0%; left: 0%; width: 512px; height: 20px; text-align: center;" onclick="document.querySelector('.startScreen').style.display = 'block'; document.querySelector('.leaderboard').style.display = 'none'; songchange(0)">Main Menu</div>
         </div>
         <div class="startScreen" style="width: 512px; height: 512px; z-index: 103; position: absolute; background-color: black;">
-            <br>
             <p class="songnamedisp" style="height: min-content;">KATAMARI</p>
             <p class="songartistdisp" style="margin-bottom: 4px;">Femtanyl</p>
+            <br>
             <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; grid-gap: 16px; margin-left: -80px;">
                 <img class="prevAAdisp" src="img/Femtanyl - KATAMARI.png" width="192" height="192" style="margin-top: 32px;">
-                <img class="songAAdisp" src="img/Femtanyl - KATAMARI.png" width="256" height="256">
+                <div style="width: 256px; height: 256px;">
+                    <img class="songAAdisp" src="img/Femtanyl - KATAMARI.png" width="256" height="256">
+                    <div style="position: absolute; z-index: -100; animation: trip_shadow 10s ease infinite; top: 58.4px; width: 256px; height: 256px; background-image: url(img/trip_shadow.png);" src="img/trip_shadow.png"></div>
+                    <div style="position: absolute; z-index: -100; animation: trip_shadow 10s -5s ease infinite; top: 58.4px; width: 256px; height: 256px; background-image: url(img/trip_shadow.png);"></div>
+                </div>
                 <img class="nextAAdisp" src="img/Femtanyl - KATAMARI.png" width="192" height="192" style="margin-top: 32px;">
             </div>
+            <br>
             <div class="songLinks" style="height: 16px;"></div>
             <div style="display: grid; grid-template-columns: 256px 256px; margin: auto; width: max-content;">
                 <div class="songSel" style="width: 512px;">
                     <br>
-                    <p><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p><br>
+                    <p><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p>
                     
-                    <div onclick="preview = false; init()">START</div>
-                    <div onclick="preview = true; init()">PREVIEW</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; mix-blend-mode: difference;">
+                        <div onclick="preview = false; init()">START</div>
+                        <div onclick="preview = true; init()">PREVIEW</div>
+                        <p></p>
+                        <p></p>
+                        <div>BEST SCORE</div>
+                        <div class="bestPointsDisp">0</div>
+                        <div>BEST COMBO</div>
+                        <div class="bestComboDisp">x0</div>
+                        <div>BEST ACC</div>
+                        <div class="bestAccDisp">0%</div>
+                    </div>
+                    <img src="img/rankU.png" class="bestRankDisp" style="margin-top: -64px; z-index: -100;">
                 </div>
                 <div class="weaponSel" style="display: none;">
                     <br>
@@ -118,6 +136,27 @@
                         <p>|</p>
                         <p style="text-align: left;" class="gunInfoScore">0.25x</p>
                     </div>
+                </div>
+            </div>
+            <div class="rankLegend" style="width: 512px; position: absolute; bottom: -80px; z-index: 500; pointer-events: none;" onclick="if (this.style.bottom == '-80px'){this.style.bottom = '0px'} else {this.style.bottom = '-80px'}">
+                <p style="background-color: black; width: max-content; margin: auto; pointer-events: all;">RANK LEGEND</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; width: 512px; background-color: black; pointer-events: all;">
+                    <p>U</p>
+                    <p>F</p>
+                    <p>D</p>
+                    <p>C</p>
+                    <p>B</p>
+                    <p>A</p>
+                    <p>S</p>
+                    <p>P</p>
+                    <img src="img/rankU.png">
+                    <img src="img/rankF.png">
+                    <img src="img/rankD.png">
+                    <img src="img/rankC.png">
+                    <img src="img/rankB.png">
+                    <img src="img/rankA.png">
+                    <img src="img/rankS.png">
+                    <img src="img/rankP.png">
                 </div>
             </div>
             <p style="position: absolute; bottom: 0px; left: 0px; height: 20px;" onclick="document.querySelector('.settingsScreen').style.display = 'block'">SETTINGS</p>
@@ -179,66 +218,77 @@
         </div>
 
         <div class="loadScreen" style="width: 512px; height: 512px; z-index: 104; position: absolute; background-color: black; background-image: url('img/ebe.png'); background-size: cover;" onclick="if (load && (document.querySelector('.NewgroundsIO').innerHTML == 'Click To Start.' || offline)){songchange(0); this.style.display = 'none'}">
+            <div class="loadZoneDeluxe" style="position: absolute; width: 0px; height: 512px; top: 0%; left: 0%; z-index: 100; mix-blend-mode: difference; background-color: white;"></div>
+            <script>
+                let loadLoop = setInterval(function(){
+                    document.querySelector(".loadZoneDeluxe").style.width = 512 - ((loaded/27)*512) + "px"
+
+                    if (loaded == 27){
+                        clearInterval(loadLoop)
+                        return
+                    }
+                }, 10)
+            </script>
             <br>
             <h1 style="mix-blend-mode: difference;">SHOTS IN THE DARK</h1>
             <div class="NewgroundsIO" style="mix-blend-mode: difference;"></div>
             <div class="loadZone" style="display: none;">
-                <img src="img/ebe.png">
-                <audio preload="auto" src="audio/music/amalgam.mp3"></audio>
-                <audio preload="auto" src="audio/music/KATAMARI.mp3"></audio>
-                <audio preload="auto" src="audio/KATAMARI_prev.mp3"></audio>
-                <audio preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
-                <audio preload="auto" src="audio/music/tutorial.mp3"></audio>
-                <audio preload="auto" src="audio/music/tutorial_censor.mp3"></audio>
-                <audio preload="auto" src="audio/Boot Sequence.mp3"></audio>
-                <audio preload="auto" src="audio/HC_reload.mp3"></audio>
-                <audio preload="auto" src="audio/HC_shoot.mp3"></audio>
-                <audio preload="auto" src="audio/reload.mp3"></audio>
-                <audio preload="auto" src="audio/reloadshort.mp3"></audio>
-                <audio preload="auto" src="audio/shot2.mp3"></audio>
-                <audio preload="auto" src="audio/shot3.mp3"></audio>
-                <img src="img/buckshot.png">
-                <img src="img/bullet.png">
-                <img src="img/case.png">
-                <img src="img/cover_UT.png">
-                <img src="img/classic.png">
-                <img src="img/crossBC.png">
-                <img src="img/crossBL.png">
-                <img src="img/crossBR.png">
-                <img src="img/crossCL.png">
-                <img src="img/crossCR.png">
-                <img src="img/crossTC.png">
-                <img src="img/crossTL.png">
-                <img src="img/crossTR.png">
-                <img src="img/ante iudicium doceo.png">
-                <img src="img/Femtanyl - KATAMARI.png">
-                <img src="img/heavy.png">
-                <img src="img/heavycase.png">
-                <img src="img/hitmarker.png">
-                <img src="img/miss.png">
-                <img src="img/pico.png">
-                <img src="img/rankA.png">
-                <img src="img/rankB.png">
-                <img src="img/rankC.png">
-                <img src="img/rankD.png">
-                <img src="img/rankF.png">
-                <img src="img/rankS.png">
-                <img src="img/slug.png">
-                <img src="img/target.png">
-                <img src="img/targetghost.png">
+                <img onload="loaded++" src="img/ebe.png">
+                <audio onload="loaded++" preload="auto" src="audio/music/amalgam.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/music/KATAMARI.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/music/KATAMARI_prev.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/music/Mystery Circles Ultra.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/music/tutorial.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/music/tutorial_censor.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/Boot Sequence.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/HC_reload.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/HC_shoot.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/reload.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/reloadshort.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/shot2.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/shot3.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/rude_equip.mp3"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/snd_rudebuster_hit.wav"></audio>
+                <audio onload="loaded++" preload="auto" src="audio/snd_rudebuster_swing.wav"></audio>
+                <img onload="loaded++" src="img/buckshot.png">
+                <img onload="loaded++" src="img/bullet.png">
+                <img onload="loaded++" src="img/case.png">
+                <img onload="loaded++" src="img/cover_UT.png">
+                <img onload="loaded++" src="img/classic.png">
+                <img onload="loaded++" src="img/crossBL.png">
+                <img onload="loaded++" src="img/crossBR.png">
+                <img onload="loaded++" src="img/crossTL.png">
+                <img onload="loaded++" src="img/crossTR.png">
+                <img onload="loaded++" src="img/ante iudicium doceo.png">
+                <img onload="loaded++" src="img/Femtanyl - KATAMARI.png">
+                <img onload="loaded++" src="img/heavy.png">
+                <img onload="loaded++" src="img/heavycase.png">
+                <img onload="loaded++" src="img/hitmarker.png">
+                <img onload="loaded++" src="img/miss.png">
+                <img onload="loaded++" src="img/pico.png">
+                <img onload="loaded++" src="img/rankA.png">
+                <img onload="loaded++" src="img/rankB.png">
+                <img onload="loaded++" src="img/rankC.png">
+                <img onload="loaded++" src="img/rankD.png">
+                <img onload="loaded++" src="img/rankF.png">
+                <img onload="loaded++" src="img/rankS.png">
+                <img onload="loaded++" src="img/rankU.png">
+                <img onload="loaded++" src="img/rankP.png">
+                <img onload="loaded++" src="img/slug.png">
+                <img onload="loaded++" src="img/target.png">
             </div>
         </div>
     </div>
 
     <div class="crosshair">
         <div style="position: absolute; top: 0%; left: 0%; width: 7px; height: 7px; background-image: url('img/crossTL.png');"></div>
-        <div style="position: absolute; top: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-image: url('img/crossTC.png');"></div>
+        <div style="position: absolute; top: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px;  background-color: white;"></div>
         <div style="position: absolute; top: 0%; right: 0%; width: 7px; height: 7px; background-image: url('img/crossTR.png');"></div>
-        <div style="position: absolute; top: calc(50% - 0.5px); left: 0%; width: 7px; height: 1px; background-image: url('img/crossCL.png');"></div>
+        <div style="position: absolute; top: calc(50% - 0.5px); left: 0%; width: 7px; height: 1px; background-color: white;"></div>
         <div style="position: absolute; top: calc(50% - 0.5px); left: calc(50% - 0.5px); width: 1px; height: 1px; background-color: white;"></div>
-        <div style="position: absolute; top: calc(50% - 0.5px); right: 0%; width: 7px; height: 1px; background-image: url('img/crossCR.png');"></div>
+        <div style="position: absolute; top: calc(50% - 0.5px); right: 0%; width: 7px; height: 1px; background-color: white;"></div>
         <div style="position: absolute; bottom: 0%; left: 0%; width: 7px; height: 7px; background-image: url('img/crossBL.png');"></div>
-        <div style="position: absolute; bottom: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-image: url('img/crossBC.png');"></div>
+        <div style="position: absolute; bottom: 0%; left: calc(50% - 0.5px); width: 1px; height: 7px; background-color: white;"></div>
         <div style="position: absolute; bottom: 0%; right: 0%; width: 7px; height: 7px; background-image: url('img/crossBR.png');"></div>
     </div>
     

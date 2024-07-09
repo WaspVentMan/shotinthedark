@@ -8,6 +8,14 @@
     to {background-position: 64px 32px;}
 }
 
+@keyframes trip_shadow {
+    0% {left: 112px; margin-top: -16px; background-position: 0px 0px;}
+    25% {left: 144px; margin-top: -16px; background-position: -32px 0px;}
+    50% {left: 144px; margin-top: 16px; background-position: -32px -32px;}
+    75% {left: 112px; margin-top: 16px; background-position: 0px -32px;}
+    100% {left: 112px; margin-top: -16px; background-position: 0px 0px;}
+}
+
 body {
     animation: bgscroll 10s linear infinite;
 }

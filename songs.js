@@ -10,7 +10,8 @@ const songsDONE = {
         "link": [
             {"url": "https://discord.gg/JtBMPEb54H", "type": "D"},
             {"url": "https://github.com/WaspVentMan/shotinthedark", "type": "G"},
-            {"url": "https://waspventman.newgrounds.com/", "type": "NG"}
+            {"url": "https://waspventman.newgrounds.com/", "type": "NG"},
+            {"url": "https://waspventman.co.uk/", "type": "WVM"}
         ],
         "leaderboards": [
             13853, //score
@@ -377,6 +378,10 @@ const songsWIP = {
             {
                 "url": "https://femtanyl.bandcamp.com/track/katamari",
                 "type": "BC"
+            },
+            {
+                "url": "https://www.youtube.com/watch?v=YfXpNIQbdjo",
+                "type": "YT"
             }
         ],
         "leaderboards": [
@@ -2806,7 +2811,7 @@ const songsWIP = {
             { "time": 1e100, "subtitle": "" }
         ]
     },
-    "browntown": {"music":"audio/music/BROWN TOWN SONG.mp3","prev":"audio/music/BROWN TOWN SONG.mp3","artist":"Jarrad Wright","name":"BROWN TOWN SONG","cover":"img/biglez.png","background":"img/biglez.png","link":[],"leaderboards":[],"chart":[{"pos":[-64,-64],"time":0},{"pos":[-64,256],"time":4},{"pos":[64,256],"time":4.3},{"pos":[0,0],"time":104.3},{"pos":[0,0],"time":1e+100}],"guns":[{"time":0,"gun":"none"}],"subtitle":[{"time":0,"subtitle":""},{"time":0.9,"subtitle":"This one goes a little something..."},{"time":2.1,"subtitle":""},{"time":2.7,"subtitle":"like this"},{"time":3.7,"subtitle":""},{"time":8.1,"subtitle":"Goin' around fucken brown town town"},{"time":10.1,"subtitle":"fucking around fucken signin about"},{"time":12.1,"subtitle":""},{"time":12.4,"subtitle":"mmmmmhmm"},{"time":13.4,"subtitle":""},{"time":14.3,"subtitle":"mmmmmmm"},{"time":16,"subtitle":"It's a pretty good town mate"},{"time":18,"subtitle":""},{"time":21,"subtitle":"Sass mate come up to me and he says..."},{"time":23.5,"subtitle":"Wanna go fishin Lez?"},{"time":25.5,"subtitle":"And I said you know what"},{"time":27.5,"subtitle":"why not?"},{"time":28.5,"subtitle":""},{"time":29.5,"subtitle":"So we popped down the jetty"},{"time":31.5,"subtitle":""},{"time":32,"subtitle":"Fuckin hopped in the tinnie"},{"time":34,"subtitle":""},{"time":34,"subtitle":""},{"time":1e+100,"subtitle":""}]}
+    "browntown": {"music":"audio/music/BROWN TOWN SONG.mp3","prev":"audio/music/BROWN TOWN SONG.mp3","artist":"Jarrad Wright","name":"BROWN TOWN SONG","cover":"img/biglez.png","background":"img/biglez.png","link":[],"leaderboards":[],"chart":[{"pos":[-64,-64],"time":0},{"pos":[-64,256],"time":4},{"pos":[64,256],"time":4.3},{"pos":[0,0],"time":104.3},{"pos":[0,0],"time":1e+100}],"guns":[{"time":0,"gun":"none"},{"time":1e100,"gun":"none"}],"subtitle":[{"time":0,"subtitle":""},{"time":0.9,"subtitle":"This one goes a little something..."},{"time":2.1,"subtitle":""},{"time":2.7,"subtitle":"like this"},{"time":3.7,"subtitle":""},{"time":8.1,"subtitle":"Goin' around fucken brown town town"},{"time":10.1,"subtitle":"fucking around fucken signin about"},{"time":12.1,"subtitle":""},{"time":12.4,"subtitle":"mmmmmhmm"},{"time":13.4,"subtitle":""},{"time":14.3,"subtitle":"mmmmmmm"},{"time":16,"subtitle":"It's a pretty good town mate"},{"time":18,"subtitle":""},{"time":21,"subtitle":"Sass mate come up to me and he says..."},{"time":23.5,"subtitle":"Wanna go fishin Lez?"},{"time":25.5,"subtitle":"And I said you know what"},{"time":27.5,"subtitle":"why not?"},{"time":28.5,"subtitle":""},{"time":29.5,"subtitle":"So we popped down the jetty"},{"time":31.5,"subtitle":""},{"time":32,"subtitle":"Fuckin hopped in the tinnie"},{"time":34,"subtitle":""},{"time":34,"subtitle":""},{"time":1e+100,"subtitle":""}]}
 }
 
 const songsXTRA = {
@@ -2819,7 +2824,10 @@ const songsXTRA = {
         "background": "img/ante iudicium doceo.png",
         "achievement": 79651,
         "link": [
-            {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
+            {"url": "https://discord.gg/JtBMPEb54H", "type": "D"},
+            {"url": "https://github.com/WaspVentMan/shotinthedark", "type": "G"},
+            {"url": "https://waspventman.newgrounds.com/", "type": "NG"},
+            {"url": "https://waspventman.co.uk/", "type": "WVM"}
         ],
         "leaderboards": [
             13853, //score
@@ -2876,7 +2884,7 @@ const songsXTRA = {
             { "time": 16.300, "subtitle": "That's the tutorial" },
             { "time": 17.200, "subtitle": "Fuck you" },
             { "time": 17.700, "subtitle": "" },
-            { "time": 18, "subtitle": "<img src='https://static.wikia.nocookie.net/smiling-friends/images/a/ad/Mrlandlord.png/revision/latest?cb=20240611215700' style='height: 400px'><br>I was just wondering if you wanted to HANG out with me and smoke weed and fill our bellies with DIET soda and play Burnout: Revenge for the PS2?"},
+            { "time": 18, "subtitle": "I was just wondering if you wanted to HANG out with me and smoke weed and fill our bellies with DIET soda and play Burnout: Revenge for the PS2?"},
             { "time": 1e100, "subtitle": "" }
         ]
     },
@@ -2889,7 +2897,10 @@ const songsXTRA = {
         "background": "img/ante iudicium doceo.png",
         "achievement": 79651,
         "link": [
-            {"url": "https:waspventman.newgrounds.com/", "type": "NG"}
+            {"url": "https://discord.gg/JtBMPEb54H", "type": "D"},
+            {"url": "https://github.com/WaspVentMan/shotinthedark", "type": "G"},
+            {"url": "https://waspventman.newgrounds.com/", "type": "NG"},
+            {"url": "https://waspventman.co.uk/", "type": "WVM"}
         ],
         "leaderboards": [
             13853, //score

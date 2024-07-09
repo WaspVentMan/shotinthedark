@@ -4,7 +4,8 @@ let offline = false
 var options = {
     version: "0",
     preloadScoreBoards: true,
-    preloadMedals: true
+    preloadMedals: true,
+    preloadSaveSlots: true
 };
 
 NGIO.init("58408:0ZunjkMB", "Ca7ijAMxmngDx6FYGVsVOg==", options);
@@ -65,6 +66,17 @@ let ngLoop = setInterval(function(){
 
                 // If NGIO.hasUser is false, the user opted not to sign in, so you may
                 // need to do some special handling in your game.
+
+                let slot = NGIO.getSaveSlot(1);
+
+                if (slot.hasData) {
+                    // It sure does! You can even see when it was last updated via: slot.getDate()
+
+                    // The slot instance has a method for loading as well, if you don't want to use the NGIO wrapper:
+                    slot.getData(function(data){
+                        scores = JSON.parse(data)
+                    })
+                }
                 
                 break
         }
