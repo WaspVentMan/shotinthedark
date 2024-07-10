@@ -89,16 +89,14 @@
                 </div>
                 <img class="nextAAdisp" src="img/Femtanyl - KATAMARI.png" width="192" height="192" style="margin-top: 32px;">
             </div>
-            <br>
+            <p style="text-shadow: -1px 0px 0 #000, 1px 0px 0 #000, 0px 1px 0 #000, 0px -1px 0 #000;"><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p>
             <div class="songLinks" style="height: 16px;"></div>
+            <br>
             <div style="display: grid; grid-template-columns: 256px 256px; margin: auto; width: max-content;">
                 <div class="songSel" style="width: 512px;">
-                    <br>
-                    <p><b onclick="songchange(-1)" style="margin: 8px;"><<<</b><b>SONG</b><b onclick="songchange(1)" style="margin: 8px;">>>></b></p>
-                    
                     <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 8px; mix-blend-mode: difference;">
-                        <div onclick="preview = false; init()">START</div>
-                        <div onclick="preview = true; init()">PREVIEW</div>
+                        <div onclick="preview = false; init()" style="width: max-content; margin: auto;">START</div>
+                        <div onclick="preview = true; init()" style="width: max-content; margin: auto;">PREVIEW</div>
                         <p></p>
                         <p></p>
                         <div>BEST SCORE</div>
@@ -111,7 +109,6 @@
                     <img src="img/rankU.png" class="bestRankDisp" style="margin-top: -64px; z-index: -100;">
                 </div>
                 <div class="weaponSel" style="display: none;">
-                    <br>
                     <p><b onclick="gunchange(-1)" style="margin: 8px;"><<<</b><b>GUN</b><b onclick="gunchange(1)" style="margin: 8px;">>>></b></p>
                     <div style="display: grid; grid-template-columns: 8fr min-content 8fr; column-gap: 8px;">
                         <p style="text-align: right;">Ammo</p>

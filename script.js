@@ -445,6 +445,10 @@ function gameloop(){
                 hitmarker.style.top = (y -7.5) + "px"
                 hitmarker.style.left = (x -7.5) + "px"
                 hitmarker.style.display = "block"
+
+                if (shot == 0){
+                    hitmarker.style.backgroundImage = "url('img/hitmarkerP.png')"
+                }
                 
                 hitmarker.className = "hitmarker hitmarker" + Math.round(x) + Math.round(y) + z
 
